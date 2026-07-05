@@ -303,7 +303,7 @@ function layout({title,desc,canonical,jsonld,body,crumb,image}){
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="naver-site-verification" content="REPLACE_NAVER_VERIFICATION" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="96x96" href="/logo.png"><link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3"><link rel="icon" type="image/png" sizes="96x96" href="/logo.png?v=3"><link rel="shortcut icon" href="/favicon.ico?v=3">
 <link rel="apple-touch-icon" href="/logo.png">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:site_name" content="${SITE_NAME}"><meta property="og:image" content="${image||SITE_URL+'/logo.png'}">
 ${ldBlocks}
@@ -697,12 +697,15 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .cta .cphone{background:var(--ink)}
 /* 히어로 배경 이미지 */
 .hero{position:relative;overflow:hidden;background:#fff;border:none;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:150px max(24px,calc(50vw - 490px));min-height:420px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.86) 0%,rgba(255,255,255,.52) 50%,rgba(255,255,255,.14) 100%),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/111.jpg') center/cover no-repeat;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,20,28,.72) 0%,rgba(15,20,28,.42) 55%,rgba(15,20,28,.18) 100%),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/111.jpg') center 25%/cover no-repeat;z-index:0}
 .hero>*{position:relative;z-index:1}
-.hero h1{font-size:2.5rem;line-height:1.4;letter-spacing:-.03em;text-align:left;margin:0 0 16px;font-weight:900}
-.hero h1 .accent{color:var(--ink)}
-.hero h1 .accent::after{background:#e5e7eb;height:14px}
-.hero p{text-align:left;color:var(--sub);font-size:1.02rem;line-height:1.7;margin:0}
+.hero h1{font-size:2.5rem;line-height:1.4;letter-spacing:-.03em;text-align:left;margin:0 0 16px;font-weight:900;color:#fff}
+.hero h1 .accent{color:#fff}
+.hero h1 .accent::after{background:rgba(255,255,255,.28);height:14px}
+.hero p{text-align:left;color:rgba(255,255,255,.92);font-size:1.06rem;line-height:1.7;margin:0}
+.herofind{margin-top:26px}
+.hfindbtn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0d1117;font-weight:800;padding:14px 26px;border-radius:10px;text-decoration:none;box-shadow:0 8px 22px rgba(0,0,0,.25);transition:.15s}
+.hfindbtn:hover{transform:translateY(-2px)}
 .hero .stat,.hero .herobtns,.hero .springbar,.hero .deco{display:none!important}
 /* 로고 상하 정렬 + 입체 */
 .hd .wrap{align-items:center}
@@ -729,9 +732,9 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .bdot.on{background:#fff;width:22px;border-radius:5px}
 @media(max-width:600px){.bslide{aspect-ratio:16/9}.bnav{width:34px;height:34px;font-size:18px}}
 /* 패널 사진 슬라이더 */
-.pslider{position:relative;overflow:hidden;border-radius:14px;background:#e5e7eb}
+.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%}
 .ptrack{display:flex;transition:transform .9s cubic-bezier(.4,0,.2,1)}
-.pslide{min-width:100%;aspect-ratio:4/3}
+.pslide{min-width:100%;aspect-ratio:4/3;background:#fff}
 .pslide img{width:100%;height:100%;object-fit:cover;display:block}
 .pnav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:none;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-size:19px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
 .pnav:hover{background:rgba(0,0,0,.6)}
@@ -790,7 +793,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 인용 밴드 — 연회색 */
 .quoteband{margin:34px 0;padding:96px 26px;border-radius:0;background:#fff;color:#0d1117;text-align:center}
 .quoteband h2{font-size:2.6rem;line-height:1.5;margin:0;font-weight:900;letter-spacing:-.04em;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif}
-.quoteband .uline{box-shadow:inset 0 -16px #e5e7eb;padding:0 2px}
+.quoteband .uline{color:#2563eb;box-shadow:inset 0 -16px rgba(37,99,235,.16);padding:0 2px}
 @media(max-width:700px){.quoteband h2{font-size:1.6rem}}
 @media(max-width:700px){.featpanel,.mgmt{grid-template-columns:1fr}.mgmt.rev .ph{order:0}.proc4{grid-template-columns:repeat(2,1fr)}.bandtiles{grid-template-columns:1fr}.quoteband h2{font-size:1.15rem}}
 /* 이모지 모노톤 */
@@ -798,7 +801,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .ph img{filter:none}
 /* CTA — 배경 사진(222) 풀와이드 + 흰 글씨 */
 .cta{position:relative;overflow:hidden;border:none!important;background:#374151!important}
-.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,24,31,.5),rgba(20,24,31,.62)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.34),rgba(15,20,28,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
 .cta>*{position:relative;z-index:1}
 .cta h2{color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .cta p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
@@ -811,12 +814,12 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .finq{background:#4b5563!important;color:#fff}
 .fbtn .fic,.fbtn .flbl{color:#fff!important;filter:none!important}
 /* 회색 섹션 화면 끝까지 와이드 (풀블리드) */
-body{overflow-x:hidden}
+html,body{overflow-x:clip;max-width:100%}
 .band,.featpanel,.mgmt,.plus,.quoteband,.cta{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;box-sizing:border-box;padding-left:max(24px,calc(50vw - 490px));padding-right:max(24px,calc(50vw - 490px))}
 .featpanel,.mgmt{padding-top:44px;padding-bottom:44px}
 .band{padding-top:30px;padding-bottom:30px}
 .plus,.quoteband{padding-top:52px;padding-bottom:52px}
-.cta{padding-top:56px;padding-bottom:56px}
+.cta{padding-top:120px;padding-bottom:120px;min-height:300px}
 /* 플로팅 버튼 모노톤 */
 .hero h1 .pencil{display:none}
 /* 지역 아코디언 */
@@ -1022,10 +1025,10 @@ function pageHome(){
   const faqLd=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":homeFaqs.map(f=>({"@type":"Question","name":f[0],"acceptedAnswer":{"@type":"Answer","text":f[1]}}))});
 
   const springHoles = Array.from({length:9},(_,i)=>`<span style="top:${36+i*64}px"></span>`).join("");
-  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><h1><span class="accent">아이 스스로</span> 공부하는 힘,<br>와와학원이 함께합니다</h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지<br>우리 동네 가까운 지점에서 시작하세요</p><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
+  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><h1><span class="accent">아이 스스로</span> 공부하는 힘,<br>와와학원이 함께합니다</h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지<br>우리 동네 가까운 지점에서 시작하세요</p><div class="herofind"><a href="/regions" class="hfindbtn">🔎 지역별 학원 찾기</a></div><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
 
 <section class="sec"><h2>📚 과목별 학원</h2><p class="subt">국어·영어·수학·과학·사회, 초·중·고 전 과목 학원 정보를 안내합니다.</p><div class="subjgrid">${subjCards}</div></section>
-<div class="band"><div class="bandslider" id="bandSlider"><div class="btrack"><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/90.jpg" alt="와와학원 전경 1" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/91.jpg" alt="와와학원 전경 2" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/92.jpg" alt="와와학원 전경 3" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/93.jpg" alt="와와학원 전경 4" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/94.jpg" alt="와와학원 전경 5" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/95.jpg" alt="와와학원 전경 6" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/96.jpg" alt="와와학원 전경 7" loading="lazy"></div></div><button class="bnav bprev" aria-label="이전">‹</button><button class="bnav bnext" aria-label="다음">›</button><div class="bdots"><button class="bdot on" data-i="0" aria-label="사진 1"></button><button class="bdot" data-i="1" aria-label="사진 2"></button><button class="bdot" data-i="2" aria-label="사진 3"></button><button class="bdot" data-i="3" aria-label="사진 4"></button><button class="bdot" data-i="4" aria-label="사진 5"></button><button class="bdot" data-i="5" aria-label="사진 6"></button><button class="bdot" data-i="6" aria-label="사진 7"></button></div></div>
+<div class="band">
 <div class="bandtiles">
 <div class="bandtile"><small>전국에서 만나는</small><b>205개 지점</b></div>
 <div class="bandtile"><small>동네마다 가까이</small><b>176개 동네</b></div>
@@ -1099,7 +1102,7 @@ function pageHome(){
 
 
 
-<section class="sec"><h2>🗺️ 지역으로 찾기</h2><p class="subt">시·도를 선택하면 시군구·동네별 학원 정보를 볼 수 있습니다.</p><div class="raccwrap">${grid}</div></section>
+
 
 
 
