@@ -319,7 +319,7 @@ ${FLOATING}
 ${INQUIRY_MODAL}
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>${INQUIRY_JS}</script>
-<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script>(function(){var el=document.getElementById("bandSlider");if(!el)return;var tr=el.querySelector(".btrack"),dots=el.querySelectorAll(".bdot"),n=el.querySelectorAll(".bslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,4000);}function stop(){clearInterval(t);}el.querySelector(".bnext").onclick=function(){stop();nx();auto();};el.querySelector(".bprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();})();document.querySelectorAll(".pslider").forEach(function(el){var tr=el.querySelector(".ptrack"),dots=el.querySelectorAll(".pdot"),n=el.querySelectorAll(".pslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,4500);}function stop(){clearInterval(t);}el.querySelector(".pnext").onclick=function(){stop();nx();auto();};el.querySelector(".pprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();});</script><script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
 <script type="text/javascript">if(!window.wcs_add)var wcs_add={};wcs_add["wa"]="REPLACE_NAVER_ANALYTICS_WA";if(window.wcs){wcs_do();}</script>
 <script>(function(){function t(ty){try{fetch("/api/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:ty,page:location.pathname,ref:document.referrer})});}catch(e){}}if(location.pathname.indexOf("/api/")!==0)t("view");document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute&&a.getAttribute("href"))||"";if(h.indexOf("tel:")===0)t("tel");else if(h.indexOf("sms:")===0)t("sms");else if(a.className&&(""+a.className).indexOf("inqsubmit")>=0)t("contact");},true);})();</script>
 </body></html>`;
@@ -672,6 +672,18 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .herobtns .hinq{background:#fff;color:var(--ink);border:1px solid var(--ink);border-radius:10px;box-shadow:none}
 .sec h2{color:var(--ink)}
 .subjcard{border:1px solid var(--line);border-radius:14px;text-align:center;background:#fff;box-shadow:none}
+/* 과목 카드 배경 사진 (11~15) */
+.subjcard{color:#fff!important;overflow:hidden;border:none!important;position:relative;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.subjcard::before{display:none}
+.subjname{color:#fff!important;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.subjdesc{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.subjicon{filter:none!important;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.subjcard:hover{transform:translateY(-3px);border:none}
+.subjcard:nth-child(1){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/11.jpg') center/cover no-repeat}
+.subjcard:nth-child(2){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/12.jpg') center/cover no-repeat}
+.subjcard:nth-child(3){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/13.jpg') center/cover no-repeat}
+.subjcard:nth-child(4){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/14.jpg') center/cover no-repeat}
+.subjcard:nth-child(5){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/15.jpg') center/cover no-repeat}
 .subjcard::before{display:none}
 .subjcard:hover{border-color:var(--ink);transition:.15s}
 .howto{background:var(--soft);border:none;border-radius:16px}
@@ -683,12 +695,50 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .whyitem{border:1px solid var(--line);box-shadow:none}
 .cta{background:var(--soft);border:none}
 .cta .cphone{background:var(--ink)}
+/* 히어로 배경 이미지 */
+.hero{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);padding:88px 34px;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.90) 0%,rgba(255,255,255,.58) 52%,rgba(255,255,255,.20) 100%),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/111.jpg') center/cover no-repeat;z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:2rem;line-height:1.45;letter-spacing:-.02em;text-align:left;margin:0 0 14px}
+.hero h1 .accent{color:var(--ink)}
+.hero h1 .accent::after{background:#e5e7eb;height:14px}
+.hero p{text-align:left;color:var(--sub);font-size:1.02rem;line-height:1.7;margin:0}
+.hero .stat,.hero .herobtns,.hero .springbar,.hero .deco{display:none!important}
+/* 로고 상하 정렬 */
+.hd .wrap{align-items:center}
+.logo{align-items:center;line-height:1}
+.logo .logoimg,.logo svg{width:32px;height:32px;display:block}
+.logo .logotxt{display:flex;align-items:center;line-height:1}
 /* 사진 자리 */
 .ph{display:flex;align-items:center;justify-content:center;border:1px dashed #d1d5db;border-radius:14px;background:var(--soft);color:#9ca3af;font-size:14px;font-weight:600;min-height:220px}
 .ph.small{min-height:150px}
 /* 스탯 밴드 — 연회색 */
 .band{margin:34px 0;border-radius:18px;background:var(--soft);padding:26px 22px}
 .band .bandph{border-color:#d1d5db;color:#9ca3af;background:#fff;min-height:120px;margin-bottom:18px}
+/* 밴드 슬라이더 */
+.bandslider{position:relative;overflow:hidden;border-radius:14px;margin-bottom:18px;background:#e5e7eb}
+.btrack{display:flex;transition:transform .5s ease}
+.bslide{min-width:100%;aspect-ratio:16/6}
+.bslide img{width:100%;height:100%;object-fit:cover;display:block}
+.bnav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:none;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.bnav:hover{background:rgba(0,0,0,.6)}
+.bprev{left:12px} .bnext{right:12px}
+.bdots{position:absolute;bottom:12px;left:0;right:0;display:flex;gap:7px;justify-content:center;z-index:2}
+.bdot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.55);cursor:pointer;padding:0}
+.bdot.on{background:#fff;width:22px;border-radius:5px}
+@media(max-width:600px){.bslide{aspect-ratio:16/9}.bnav{width:34px;height:34px;font-size:18px}}
+/* 패널 사진 슬라이더 */
+.pslider{position:relative;overflow:hidden;border-radius:14px;background:#e5e7eb}
+.ptrack{display:flex;transition:transform .5s ease}
+.pslide{min-width:100%;aspect-ratio:4/3}
+.pslide img{width:100%;height:100%;object-fit:cover;display:block}
+.pnav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:none;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;font-size:19px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.pnav:hover{background:rgba(0,0,0,.6)}
+.pprev{left:10px} .pnext{right:10px}
+.pdots{position:absolute;bottom:10px;left:0;right:0;display:flex;gap:6px;justify-content:center;z-index:2}
+.pdot{width:8px;height:8px;border-radius:50%;border:none;background:rgba(255,255,255,.55);cursor:pointer;padding:0}
+.pdot.on{background:#fff;width:18px;border-radius:4px}
+.featpanel .ph,.mgmt .ph{display:none}
 .bandtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .bandtile{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:22px 16px;text-align:center}
 .bandtile small{display:block;color:var(--sub);font-size:.85rem;margin-bottom:6px}
@@ -739,10 +789,28 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 이모지 모노톤 */
 .sec h2,.howto h2,.why h2,.cta h2,.plus h2,.subjicon,.whyic,.herobadge,.s3t,.popchip,.note,.quoteband h2,.ph,.fic,.hcall,.hinq,.cphone,.cinq,.aliasbar{filter:grayscale(1)}
 .ph img{filter:none}
+/* CTA — 배경 사진(222) 풀와이드 + 흰 글씨 */
+.cta{position:relative;overflow:hidden;border:none!important;background:#374151!important}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,24,31,.5),rgba(20,24,31,.62)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
+.cta>*{position:relative;z-index:1}
+.cta h2{color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.cta p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.cta .cphone{background:#fff!important;color:var(--ink)!important}
+.cta .cinq{background:rgba(255,255,255,.16)!important;color:#fff!important;border:1px solid rgba(255,255,255,.6)}
+/* 플로팅 버튼 (진한 차콜, 확실히 보이게) */
+.fbtn{box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.fcall{background:#111827!important;color:#fff}
+.fsms{background:#374151!important;color:#fff}
+.finq{background:#4b5563!important;color:#fff}
+.fbtn .fic,.fbtn .flbl{color:#fff!important;filter:none!important}
+/* 회색 섹션 화면 끝까지 와이드 (풀블리드) */
+body{overflow-x:hidden}
+.band,.featpanel,.mgmt,.plus,.quoteband,.cta{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;box-sizing:border-box;padding-left:max(24px,calc(50vw - 490px));padding-right:max(24px,calc(50vw - 490px))}
+.featpanel,.mgmt{padding-top:44px;padding-bottom:44px}
+.band{padding-top:30px;padding-bottom:30px}
+.plus,.quoteband{padding-top:52px;padding-bottom:52px}
+.cta{padding-top:56px;padding-bottom:56px}
 /* 플로팅 버튼 모노톤 */
-.fcall{background:var(--ink)}
-.fsms{background:#6b7280}
-.finq{background:#374151}
 .hero h1 .pencil{display:none}
 @media(max-width:600px){.hero{padding:38px 16px}}
 `;
@@ -855,6 +923,14 @@ function relatedChips(dong, subj, lv){
 }
 
 // ---------- 페이지: 동 ----------
+function dongProse(dong,sgg,sido,alias,chere){
+  const rng=seedRng(dong+"waw3dp"); const n=chere.length;
+  const a=[`${sgg} ${dong}에는 현재 ${n}곳의 학원 정보가 등록되어 있습니다.`,`${sgg} ${dong} 일대의 학원을 지역·과목별로 정리했습니다.`,`${dong}에서 아이에게 맞는 학원을 찾고 계신다면 아래 정보를 참고해 보세요.`];
+  const b=[`${dong}은 ${LG_INTRO(rng)} 학년과 과목에 맞춰 학습을 이어 가기 좋은 지역입니다.`,`가까운 거리에서 꾸준히 다닐 수 있는 곳을 고르면 학습의 연속성이 지켜집니다.`,`통학 거리와 관리 방식, 상담 체계를 함께 살펴 아이에게 맞는 곳을 정해 보세요.`];
+  const c=[`${alias?alias+" 생활권을 포함한 ":""}${dong} 인근 학교의 시험 범위와 내신 일정에 맞춰 준비하면 도움이 됩니다.`,`학년과 수준에 따라 필요한 학습이 다르므로, 상담을 통해 방향을 잡는 것을 권합니다.`,`아래 과목·학년별 안내에서 세부 정보를 확인할 수 있습니다.`];
+  return `<section class="sec"><h2>${esc(dong)} 학원 안내</h2><p>${pick(rng,a)} ${pick(rng,b)} ${pick(rng,c)}</p></section>`;
+}
+function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교"]); }
 function pageDong(dong, chere){
   const idx=buildIndex(); const sgg=chere[0].sgg; const sido=chere[0].sido;
   const alias=centerAlias(chere); const areatype=centerAreatype(chere);
@@ -869,7 +945,7 @@ function pageDong(dong, chere){
   const canonical=SITE_URL+urlDong(dong);
   const desc=alias?`${sgg} ${dong}(${alias}) 학원 정보. ${alias} 과목별·학년별 학원 안내.`:`${sgg} ${dong} 학원 정보. ${dong} 지역 과목별·학년별 학원 안내와 인근 학교 내신 대비 정보를 확인하세요.`;
   const thumb=thumbBlock(`dong|${dong}`, `${dong} 학원`, alias?`${sgg} ${dong} · ${alias}`:`${sido} ${sgg}`);
-  const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${aliasBadge}${summary}<section class="sec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
+  const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sido,url:urlRegion(sido)},{name:dong}];
   const ttl=alias?`${dong} 학원 (${alias}) | ${sgg}`:`${dong} 학원 | ${sgg} 과목별 학원 정보`;
   return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`)});
@@ -922,10 +998,10 @@ function pageHome(){
   const faqLd=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":homeFaqs.map(f=>({"@type":"Question","name":f[0],"acceptedAnswer":{"@type":"Answer","text":f[1]}}))});
 
   const springHoles = Array.from({length:9},(_,i)=>`<span style="top:${36+i*64}px"></span>`).join("");
-  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><div class="herobadge">📖 전국 ${totalCenter}개 지점 · ${totalDong}개 동네</div><h1>아이 공부의 시작,<br><span class="accent">와와학원</span><span class="pencil">📖</span><span class="sub2">가까운 지점을 찾아보세요</span></h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지. 우리 동네 와와학원을 찾아 상담부터 편하게 시작해 보세요.</p><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
+  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><h1><span class="accent">아이 스스로</span> 공부하는 힘,<br>와와학원이 함께합니다</h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지<br>우리 동네 가까운 지점에서 시작하세요</p><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
 
 <section class="sec"><h2>📚 과목별 학원</h2><p class="subt">국어·영어·수학·과학·사회, 초·중·고 전 과목 학원 정보를 안내합니다.</p><div class="subjgrid">${subjCards}</div></section>
-<div class="band"><div class="ph bandph" data-slot="band">📷 학원 전경 사진 자리</div>
+<div class="band"><div class="bandslider" id="bandSlider"><div class="btrack"><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/90.jpg" alt="와와학원 전경 1" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/91.jpg" alt="와와학원 전경 2" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/92.jpg" alt="와와학원 전경 3" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/93.jpg" alt="와와학원 전경 4" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/94.jpg" alt="와와학원 전경 5" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/95.jpg" alt="와와학원 전경 6" loading="lazy"></div><div class="bslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/96.jpg" alt="와와학원 전경 7" loading="lazy"></div></div><button class="bnav bprev" aria-label="이전">‹</button><button class="bnav bnext" aria-label="다음">›</button><div class="bdots"><button class="bdot on" data-i="0" aria-label="사진 1"></button><button class="bdot" data-i="1" aria-label="사진 2"></button><button class="bdot" data-i="2" aria-label="사진 3"></button><button class="bdot" data-i="3" aria-label="사진 4"></button><button class="bdot" data-i="4" aria-label="사진 5"></button><button class="bdot" data-i="5" aria-label="사진 6"></button><button class="bdot" data-i="6" aria-label="사진 7"></button></div></div>
 <div class="bandtiles">
 <div class="bandtile"><small>전국에서 만나는</small><b>205개 지점</b></div>
 <div class="bandtile"><small>동네마다 가까이</small><b>176개 동네</b></div>
@@ -936,13 +1012,13 @@ function pageHome(){
 <h3>공부가 편해지는 공간</h3>
 <p>와와학원은 오랜 코칭 교육 경험을 바탕으로, <span class="hl">공부가 잘 되는 환경과 성적이 오르는 경험</span>을 만드는 데 집중합니다.</p>
 <p>학생 눈높이에서 진행되는 수평적인 수업이 <span class="hl">수업 참여도와 이해도</span>를 함께 끌어올립니다.</p>
-</div><div class="ph" data-slot="feat1">📷 수업 사진 자리</div></div>
+</div><div class="pslider" id="ps_feat1"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/60.jpg" alt="수업 공간 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/61.jpg" alt="수업 공간 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/62.jpg" alt="수업 공간 3" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/63.jpg" alt="수업 공간 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
 
 <div class="featpanel green"><div>
 <h3>수업 그 너머의 생활 관리</h3>
 <p>공부는 수업 시간 안에서만 일어나지 않습니다. <span class="hl">학생과의 일상 소통, 학부모와의 꾸준한 피드백</span>으로 학습 습관과 생활 리듬까지 함께 살핍니다.</p>
 <p>아이의 하루를 함께 이해하고 챙기는 <span class="hl">생활 밀착형 학습 코칭</span>이 와와의 방식입니다.</p>
-</div><div class="ph" data-slot="feat2">📷 코칭 사진 자리</div></div>
+</div><div class="pslider" id="ps_feat2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/70.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/71.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/72.jpg" alt="생활 관리 3" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/73.jpg" alt="생활 관리 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
 
 <section class="sec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
@@ -967,9 +1043,9 @@ function pageHome(){
 <span class="tag">계획을 세우고 실천하는 힘</span><h3>플랜 관리</h3>
 <p>무작정 공부하라고 하지 않습니다. 선생님과 함께 학습 목표와 우선순위를 정하고, <b>시간과 분량을 스스로 조절하는 법</b>을 익힙니다.</p>
 <p>계획하고 실행하는 경험이 쌓이면서 자기주도 학습의 기초 체력이 자랍니다.</p>
-</div><div class="ph" data-slot="mgmt1">📷 플래너 사진 자리</div></div>
+</div><div class="pslider" id="ps_mgmt1"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a11.jpg" alt="플랜 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a12.jpg" alt="플랜 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a13.jpg" alt="플랜 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
-<div class="mgmt rev"><div class="ph" data-slot="mgmt2">📷 학습 자료 사진 자리</div><div>
+<div class="mgmt rev"><div class="pslider" id="ps_mgmt2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b11.jpg" alt="학습 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b12.jpg" alt="학습 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b13.jpg" alt="학습 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div><div>
 <span class="tag">아이에게 맞는 방식으로</span><h3>학습 관리</h3>
 <p>진도만 빠르게 나가지 않습니다. <b>현재 수준과 이해도에 맞춘 교재와 공부법</b>으로 기초부터 다집니다.</p>
 <p>오답노트, 백지노트 같은 도구로 <b>나에게 맞는 공부 방법</b>을 찾아가면, 성적은 자연스럽게 따라옵니다.</p>
@@ -979,7 +1055,7 @@ function pageHome(){
 <span class="tag">학원 밖에서도 이어지는</span><h3>생활 관리</h3>
 <p><b>학생과의 일상 소통과 학부모 피드백</b>으로 학습 습관, 생활 리듬, 마음 상태까지 함께 살핍니다.</p>
 <p>아이의 하루를 이해하고 챙기는 것이 와와학원의 진짜 강점입니다.</p>
-</div><div class="ph" data-slot="mgmt3">📷 소통 사진 자리</div></div>
+</div><div class="pslider" id="ps_mgmt3"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c11.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c12.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c13.jpg" alt="생활 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
 <div class="plus"><h2>➕ 와와학원의 특장점</h2>
 <ul>
@@ -997,16 +1073,11 @@ function pageHome(){
 <div class="s3"><div class="s3n">3</div><div class="s3t">전화·문의 상담</div><div class="s3d">전화나 문의하기로 학습 상담을 받아보세요.</div></div>
 </div></section>
 
-<section class="sec"><h2>📍 인기 지역 바로가기</h2><p class="subt">학원이 많은 동네를 빠르게 확인하세요.</p><div class="popgrid">${popChips}</div></section>
+
 
 <section class="sec"><h2>🗺️ 지역으로 찾기</h2><p class="subt">시·도를 선택하면 시군구·동네별 학원 정보를 볼 수 있습니다.</p><div class="lgrid">${grid}</div></section>
 
-<section class="why"><h2>와와학원, 이런 점이 좋아요</h2><div class="whygrid">
-<div class="whyitem"><span class="whyic">🗺️</span><b>동네 단위 검색</b><p>전국 ${totalDong}개 동네의 학원 정보를 지역별로 정리했습니다.</p></div>
-<div class="whyitem"><span class="whyic">📚</span><b>과목·학년별 안내</b><p>초·중·고 학년과 5개 과목별로 맞는 정보를 제공합니다.</p></div>
-<div class="whyitem"><span class="whyic">🏫</span><b>인근 학교 정보</b><p>각 지역 인근 학교와 내신 대비 정보를 함께 안내합니다.</p></div>
-<div class="whyitem"><span class="whyic">💬</span><b>간편 상담</b><p>전화와 문의하기로 빠르게 학습 상담을 받을 수 있습니다.</p></div>
-</div></section>
+
 
 ${faqHtml}
 
