@@ -732,7 +732,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .bdot.on{background:#fff;width:22px;border-radius:5px}
 @media(max-width:600px){.bslide{aspect-ratio:16/9}.bnav{width:34px;height:34px;font-size:18px}}
 /* 패널 사진 슬라이더 */
-.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%;-webkit-mask-image:radial-gradient(120% 120% at 50% 50%,#000 72%,transparent 100%);mask-image:radial-gradient(120% 120% at 50% 50%,#000 72%,transparent 100%)}
+.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%;-webkit-mask-image:radial-gradient(115% 115% at 50% 50%,#000 55%,transparent 98%);mask-image:radial-gradient(115% 115% at 50% 50%,#000 55%,transparent 98%)}
 .ptrack{display:flex;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 .pslide{min-width:100%;aspect-ratio:4/3;background:#fff}
 .pslide img{width:100%;height:100%;object-fit:cover;display:block}
@@ -757,12 +757,12 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .featpanel .ph{background:#fff}
 .featpanel.green .ph{background:#fff}
 /* 프로세스 4카드 */
-.proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:52px 0 28px;position:relative}
+.proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:64px 0 40px;position:relative}
 .proc4 .pc{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:42px 18px 26px;text-align:center;position:relative;box-shadow:0 10px 26px rgba(0,0,0,.07);transition:transform .15s}
 .proc4 .pc:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.12)}
-.proc4 .pc .pcnum{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:#0d1117;color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.3);border:3px solid #fff}
-.proc4 .pc .pcic{width:72px;height:72px;margin:8px auto 14px;border-radius:20px;background:linear-gradient(135deg,#1f2937,#0d1117);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;filter:grayscale(1) invert(1) brightness(2);box-shadow:0 8px 18px rgba(0,0,0,.22)}
-.proc4 .pc::after{content:"A";position:absolute;top:50%;right:-14px;transform:translateY(-50%);color:#9ca3af;font-size:1.8rem;font-weight:700;z-index:2}
+.proc4 .pc .pcnum{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.3);border:3px solid #fff}
+.proc4 .pc .pcic{width:72px;height:72px;margin:8px auto 14px;border-radius:20px;background:linear-gradient(135deg,#334155,#0d1117);display:flex;align-items:center;justify-content:center;font-size:1.9rem;box-shadow:0 8px 18px rgba(0,0,0,.22)}
+.proc4 .pc::after{content:"›";position:absolute;top:50%;right:-14px;transform:translateY(-50%);color:#9ca3af;font-size:1.8rem;font-weight:700;z-index:2}
 .proc4 .pc:last-child::after{display:none}
 .proc4 .pc b{display:block;margin:6px 0 6px;font-size:1.12rem;font-weight:800;color:#0d1117}
 .proc4 .pc p{color:var(--sub);font-size:.9rem;margin:0;line-height:1.55}
@@ -799,11 +799,11 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 @media(max-width:700px){.quoteband h2{font-size:1.6rem}}
 @media(max-width:700px){.featpanel,.mgmt{grid-template-columns:1fr}.mgmt.rev .ph{order:0}.proc4{grid-template-columns:repeat(2,1fr)}.bandtiles{grid-template-columns:1fr}.quoteband h2{font-size:1.15rem}}
 /* 이모지 모노톤 */
-.sec h2,.howto h2,.why h2,.cta h2,.plus h2,.subjicon,.whyic,.herobadge,.s3t,.popchip,.note,.quoteband h2,.ph,.fic,.hcall,.hinq,.cphone,.cinq,.aliasbar{filter:grayscale(1)}
-.ph img{filter:none}
+.subjicon,.whyic,.herobadge,.s3t,.popchip,.note,.aliasbar{filter:grayscale(1)}
+.ph img,.pslide img,.bslide img{filter:none}
 /* CTA — 배경 사진(222) 풀와이드 + 흰 글씨 */
 .cta{position:relative;overflow:hidden;border:none!important;background:#374151!important}
-.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.12),rgba(15,20,28,.22)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/contain no-repeat,#1f2937;z-index:0}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.22),rgba(15,20,28,.34)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
 .cta>*{position:relative;z-index:1}
 .cta h2{color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .cta p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
@@ -831,7 +831,7 @@ html,body{overflow-x:clip;max-width:100%}
 .racc>summary{list-style:none;cursor:pointer;padding:17px 22px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:1.08rem;color:#0d1117}
 .racc>summary::-webkit-details-marker{display:none}
 .racc>summary::after{content:"+";font-size:1.4rem;color:#9ca3af;font-weight:400;line-height:1}
-.racc[open]>summary::after{content:"2"}
+.racc[open]>summary::after{content:"−"}
 .racc[open]>summary{border-bottom:1px solid var(--line)}
 .racc-cnt{font-weight:600;color:var(--sub);font-size:.9rem;margin-left:auto;margin-right:14px}
 .racc-body{padding:14px 22px 18px}
