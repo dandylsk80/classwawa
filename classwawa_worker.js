@@ -720,7 +720,8 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .band{margin:34px 0;border-radius:18px;background:var(--soft);padding:26px 22px}
 .band .bandph{border-color:#d1d5db;color:#9ca3af;background:#fff;min-height:120px;margin-bottom:18px}
 /* 밴드 슬라이더 */
-.bandslider{position:relative;overflow:hidden;border-radius:14px;margin-bottom:18px;background:#e5e7eb;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.bandslider{position:relative;overflow:hidden;border-radius:16px;margin-bottom:18px;background:#e5e7eb}
+.bandslider::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:16px;box-shadow:inset 0 0 30px 16px rgba(255,255,255,.9)}
 .btrack{display:flex;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 .bslide{min-width:100%;aspect-ratio:16/6}
 .bslide img{width:100%;height:100%;object-fit:cover;display:block}
@@ -732,7 +733,8 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .bdot.on{background:#fff;width:22px;border-radius:5px}
 @media(max-width:600px){.bslide{aspect-ratio:16/9}.bnav{width:34px;height:34px;font-size:18px}}
 /* 패널 사진 슬라이더 */
-.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%;-webkit-mask-image:radial-gradient(115% 115% at 50% 50%,#000 55%,transparent 98%);mask-image:radial-gradient(115% 115% at 50% 50%,#000 55%,transparent 98%)}
+.pslider{position:relative;overflow:hidden;border-radius:16px;background:transparent;width:100%;max-width:100%}
+.pslider::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:16px;box-shadow:inset 0 0 26px 14px rgba(255,255,255,.92)}
 .ptrack{display:flex;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 .pslide{min-width:100%;aspect-ratio:4/3;background:#fff}
 .pslide img{width:100%;height:100%;object-fit:cover;display:block}
@@ -758,6 +760,10 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .featpanel.green .ph{background:#fff}
 /* 프로세스 4카드 */
 .proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:64px 0 40px;position:relative}
+.procsec{padding:56px 0 64px;margin:24px 0}
+.procsec>h2{margin-bottom:6px}
+.faqsec{padding:64px 0 72px;margin:24px 0}
+.faqsec>h2{margin-bottom:18px}
 .proc4 .pc{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:42px 18px 26px;text-align:center;position:relative;box-shadow:0 10px 26px rgba(0,0,0,.07);transition:transform .15s}
 .proc4 .pc:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.12)}
 .proc4 .pc .pcnum{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.3);border:3px solid #fff}
@@ -1043,7 +1049,7 @@ function pageDong(dong, chere){
   const canonical=SITE_URL+urlDong(dong);
   const desc=alias?`${sgg} ${dong}(${alias}) 학원 정보. ${alias} 과목별·학년별 학원 안내.`:`${sgg} ${dong} 학원 정보. ${dong} 지역 과목별·학년별 학원 안내와 인근 학교 내신 대비 정보를 확인하세요.`;
   const thumb=thumbBlock(`dong|${dong}`, `${dong} 학원`, alias?`${sgg} ${dong} · ${alias}`:`${sido} ${sgg}`);
-  const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
+  const __dd=pageDates(`dong|${dong}`); const __dbar=`<div class="dates"><span>📅 발행일 <b>${__dd.publishedKor}</b></span><span>🔄 수정일 <b>${__dd.modifiedKor}</b></span></div>`; const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${__dbar}${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sido,url:urlRegion(sido)},{name:dong}];
   const ttl=alias?`${dong} 학원 (${alias}) | ${sgg}`:`${dong} 학원 | ${sgg} 과목별 학원 정보`;
   return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`)});
@@ -1092,7 +1098,7 @@ function pageHome(){
     ["교습비와 수업 시간도 나와 있나요?","교습비와 수업 시간은 지역·과목·학생 상황에 따라 다르므로 사이트에는 표시하지 않습니다. 자세한 사항은 각 학원에 방문상담으로 확인하실 수 있습니다."],
     ["상담은 어떻게 받나요?","페이지의 전화 버튼으로 바로 통화하시거나, 문의하기 버튼으로 학생 정보와 궁금한 점을 남기시면 안내를 받으실 수 있습니다."]
   ];
-  const faqHtml=`<section class="sec"><h2>❓ 자주 묻는 질문</h2><div class="faq">${homeFaqs.map(f=>`<details><summary><span class="q">Q. ${esc(f[0])}</span></summary><div class="a">${esc(f[1])}</div></details>`).join("")}</div></section>`;
+  const faqHtml=`<section class="sec faqsec"><h2>❓ 자주 묻는 질문</h2><div class="faq">${homeFaqs.map(f=>`<details><summary><span class="q">Q. ${esc(f[0])}</span></summary><div class="a">${esc(f[1])}</div></details>`).join("")}</div></section>`;
   const faqLd=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":homeFaqs.map(f=>({"@type":"Question","name":f[0],"acceptedAnswer":{"@type":"Answer","text":f[1]}}))});
 
   const springHoles = Array.from({length:9},(_,i)=>`<span style="top:${36+i*64}px"></span>`).join("");
@@ -1118,7 +1124,7 @@ function pageHome(){
 <p>아이의 하루를 함께 이해하고 챙기는 <span class="hl">생활 밀착형 학습 코칭</span>이 와와의 방식입니다.</p>
 </div><div class="pslider" id="ps_feat2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/70.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/71.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/72.jpg" alt="생활 관리 3" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/73.jpg" alt="생활 관리 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
 
-<section class="sec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
+<section class="sec procsec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
 <div class="pc"><div class="pcnum">01</div><div class="pcic">🔍</div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
 <div class="pc"><div class="pcnum">02</div><div class="pcic">📋</div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
