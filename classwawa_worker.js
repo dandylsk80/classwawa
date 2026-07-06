@@ -696,14 +696,14 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .cta{background:var(--soft);border:none}
 .cta .cphone{background:var(--ink)}
 /* 히어로 배경 이미지 */
-.hero{position:relative;overflow:hidden;background:#fff;border:none;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:150px max(24px,calc(50vw - 490px));min-height:420px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+.hero{position:relative;overflow:hidden;background:#fff;border:none;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:200px max(24px,calc(50vw - 490px));min-height:560px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,20,28,.72) 0%,rgba(15,20,28,.42) 55%,rgba(15,20,28,.18) 100%),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/111.jpg') center 25%/cover no-repeat;z-index:0}
 .hero>*{position:relative;z-index:1}
 .hero h1{font-size:2.5rem;line-height:1.4;letter-spacing:-.03em;text-align:left;margin:0 0 16px;font-weight:900;color:#fff}
 .hero h1 .accent{color:#fff}
 .hero h1 .accent::after{background:rgba(255,255,255,.28);height:14px}
 .hero p{text-align:left;color:rgba(255,255,255,.92);font-size:1.06rem;line-height:1.7;margin:0}
-.herofind{margin-top:26px}
+.herofind{margin-top:30px;text-align:left}
 .hfindbtn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0d1117;font-weight:800;padding:14px 26px;border-radius:10px;text-decoration:none;box-shadow:0 8px 22px rgba(0,0,0,.25);transition:.15s}
 .hfindbtn:hover{transform:translateY(-2px)}
 .hero .stat,.hero .herobtns,.hero .springbar,.hero .deco{display:none!important}
@@ -732,7 +732,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .bdot.on{background:#fff;width:22px;border-radius:5px}
 @media(max-width:600px){.bslide{aspect-ratio:16/9}.bnav{width:34px;height:34px;font-size:18px}}
 /* 패널 사진 슬라이더 */
-.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%}
+.pslider{position:relative;overflow:hidden;border-radius:14px;background:transparent;width:100%;max-width:100%;-webkit-mask-image:radial-gradient(120% 120% at 50% 50%,#000 72%,transparent 100%);mask-image:radial-gradient(120% 120% at 50% 50%,#000 72%,transparent 100%)}
 .ptrack{display:flex;transition:transform .9s cubic-bezier(.4,0,.2,1)}
 .pslide{min-width:100%;aspect-ratio:4/3;background:#fff}
 .pslide img{width:100%;height:100%;object-fit:cover;display:block}
@@ -757,13 +757,15 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .featpanel .ph{background:#fff}
 .featpanel.green .ph{background:#fff}
 /* 프로세스 4카드 */
-.proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px;position:relative}
-.proc4 .pc{background:transparent;border:none;padding:8px 14px;text-align:center;position:relative}
-.proc4 .pc .pcic{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;background:#0d1117;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;filter:grayscale(1) invert(1) brightness(2);box-shadow:0 6px 16px rgba(0,0,0,.2)}
-.proc4 .pc::after{content:"";position:absolute;top:32px;left:50%;width:100%;height:2px;background:repeating-linear-gradient(90deg,#d1d5db 0 6px,transparent 6px 12px);z-index:-1}
+.proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:52px 0 28px;position:relative}
+.proc4 .pc{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:42px 18px 26px;text-align:center;position:relative;box-shadow:0 10px 26px rgba(0,0,0,.07);transition:transform .15s}
+.proc4 .pc:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.12)}
+.proc4 .pc .pcnum{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;background:#0d1117;color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.3);border:3px solid #fff}
+.proc4 .pc .pcic{width:72px;height:72px;margin:8px auto 14px;border-radius:20px;background:linear-gradient(135deg,#1f2937,#0d1117);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;filter:grayscale(1) invert(1) brightness(2);box-shadow:0 8px 18px rgba(0,0,0,.22)}
+.proc4 .pc::after{content:"A";position:absolute;top:50%;right:-14px;transform:translateY(-50%);color:#9ca3af;font-size:1.8rem;font-weight:700;z-index:2}
 .proc4 .pc:last-child::after{display:none}
-.proc4 .pc b{display:block;margin:6px 0 4px;font-size:1.02rem}
-.proc4 .pc p{color:var(--sub);font-size:.86rem;margin:0;line-height:1.5}
+.proc4 .pc b{display:block;margin:6px 0 6px;font-size:1.12rem;font-weight:800;color:#0d1117}
+.proc4 .pc p{color:var(--sub);font-size:.9rem;margin:0;line-height:1.55}
 /* 비교표 */
 .cmpwrap{overflow-x:auto;margin-top:14px}
 .cmp{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.06);border:1px solid #e5e7eb}
@@ -793,7 +795,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 인용 밴드 — 연회색 */
 .quoteband{margin:34px 0;padding:96px 26px;border-radius:0;background:#fff;color:#0d1117;text-align:center}
 .quoteband h2{font-size:2.6rem;line-height:1.5;margin:0;font-weight:900;letter-spacing:-.04em;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif}
-.quoteband .uline{color:#2563eb;box-shadow:inset 0 -16px rgba(37,99,235,.16);padding:0 2px}
+.quoteband .uline{color:#c81e1e;box-shadow:inset 0 -16px rgba(200,30,30,.14);padding:0 2px}
 @media(max-width:700px){.quoteband h2{font-size:1.6rem}}
 @media(max-width:700px){.featpanel,.mgmt{grid-template-columns:1fr}.mgmt.rev .ph{order:0}.proc4{grid-template-columns:repeat(2,1fr)}.bandtiles{grid-template-columns:1fr}.quoteband h2{font-size:1.15rem}}
 /* 이모지 모노톤 */
@@ -801,7 +803,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .ph img{filter:none}
 /* CTA — 배경 사진(222) 풀와이드 + 흰 글씨 */
 .cta{position:relative;overflow:hidden;border:none!important;background:#374151!important}
-.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.34),rgba(15,20,28,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.12),rgba(15,20,28,.22)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/contain no-repeat,#1f2937;z-index:0}
 .cta>*{position:relative;z-index:1}
 .cta h2{color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .cta p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
@@ -810,8 +812,8 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 플로팅 버튼 (진한 차콜, 확실히 보이게) */
 .fbtn{box-shadow:0 6px 18px rgba(0,0,0,.22)}
 .fcall{background:#111827!important;color:#fff}
-.fsms{background:#374151!important;color:#fff}
-.finq{background:#4b5563!important;color:#fff}
+.fsms{background:#2563eb!important;color:#fff}
+.finq{background:#f5b301!important;color:#1a1a1a}
 .fbtn .fic,.fbtn .flbl{color:#fff!important;filter:none!important}
 /* 회색 섹션 화면 끝까지 와이드 (풀블리드) */
 html,body{overflow-x:clip;max-width:100%}
@@ -950,14 +952,83 @@ function relatedChips(dong, subj, lv){
 }
 
 // ---------- 페이지: 동 ----------
+function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교","초등부터 고등까지"]); }
+function P2(rng,pool){ const a=shuffle(rng,pool); return (a[0]||"")+" "+(a[1]||""); }
 function dongProse(dong,sgg,sido,alias,chere){
-  const rng=seedRng(dong+"waw3dp"); const n=chere.length;
-  const a=[`${sgg} ${dong}에는 현재 ${n}곳의 학원 정보가 등록되어 있습니다.`,`${sgg} ${dong} 일대의 학원을 지역·과목별로 정리했습니다.`,`${dong}에서 아이에게 맞는 학원을 찾고 계신다면 아래 정보를 참고해 보세요.`];
-  const b=[`${dong}은 ${LG_INTRO(rng)} 학년과 과목에 맞춰 학습을 이어 가기 좋은 지역입니다.`,`가까운 거리에서 꾸준히 다닐 수 있는 곳을 고르면 학습의 연속성이 지켜집니다.`,`통학 거리와 관리 방식, 상담 체계를 함께 살펴 아이에게 맞는 곳을 정해 보세요.`];
-  const c=[`${alias?alias+" 생활권을 포함한 ":""}${dong} 인근 학교의 시험 범위와 내신 일정에 맞춰 준비하면 도움이 됩니다.`,`학년과 수준에 따라 필요한 학습이 다르므로, 상담을 통해 방향을 잡는 것을 권합니다.`,`아래 과목·학년별 안내에서 세부 정보를 확인할 수 있습니다.`];
-  return `<section class="sec"><h2>${esc(dong)} 학원 안내</h2><p>${pick(rng,a)} ${pick(rng,b)} ${pick(rng,c)}</p></section>`;
+  const rng=seedRng(dong+"dpC1"+"waw3dp"); const n=chere.length;
+  const area=alias?dong+"("+alias+")":dong;
+  const subjSet=new Set(); const lvSet=new Set();
+  chere.forEach(c=>{ Object.keys(c.subj||{}).forEach(sj=>{ subjSet.add(sj); (c.subj[sj]||[]).forEach(l=>lvSet.add(l)); }); });
+  const subjs=[...subjSet]; const subjTxt=subjs.length?subjs.join("·"):"국어·영어·수학";
+  const lvMap={"초등":"초등","중등":"중학","고등":"고교"}; const lvs=[...lvSet].map(x=>lvMap[x]||x);
+  const lvTxt=lvs.length?lvs.join("·"):"초·중·고";
+  const schoolsArr=[...new Set([].concat(...chere.map(c=>c.schools||[])))];
+  const sc=shuffle(rng,schoolsArr).slice(0,6).join("·");
+  const P=[];
+
+  P.push({h:`${area} 학원, 이렇게 찾으세요`, t:[
+    P2(rng,[`${sgg} ${dong}에는 현재 ${n}곳의 학원 정보가 등록되어 있습니다.`,`${sgg} ${dong} 일대의 학원을 지역·과목·학년별로 한곳에 모았습니다.`,`${dong}에서 아이에게 맞는 학원을 찾고 있다면 이 페이지가 출발점이 됩니다.`,`${sido} ${sgg} ${dong}의 학원을 한눈에 비교할 수 있도록 정리했습니다.`,`${dong} 주변 학원을 과목과 학년 기준으로 살펴볼 수 있습니다.`,`${dong}에 어떤 학원이 있는지 궁금하다면 아래 정보를 참고해 보세요.`,`${sgg} ${dong}의 학원 선택을 돕기 위해 필요한 내용만 추렸습니다.`]),
+    P2(rng,[`${dong}은 ${LG_INTRO(rng)} 학년과 과목에 맞춰 학습을 이어 가기 좋은 지역입니다.`,`${dong}처럼 가까운 거리에서 꾸준히 다닐 수 있는 곳을 고르면 학습이 끊기지 않습니다.`,`${dong} 주변은 학교와 학원이 가까워 이동 부담이 적은 편입니다.`,`${alias?alias+" 생활권을 포함한 ":""}${dong} 일대는 ${lvTxt} 학생이 함께 다니기 좋습니다.`,`${dong}에서는 아이의 동선 안에서 다닐 수 있는 곳이 오래가기 좋습니다.`,`${sgg} ${dong}은 통학이 편해 학습 습관을 유지하기에 유리합니다.`,`${dong} 안에서도 학원마다 분위기와 관리가 달라 비교가 필요합니다.`]),
+    P2(rng,[`${dong}에서 학원을 처음 알아본다면 아이의 현재 수준과 목표를 먼저 정리해 두면 좋습니다.`,`무엇을 보완하고 싶은지 분명히 해 두면 ${dong} 학원 상담에서 방향을 잡기 쉽습니다.`,`아이가 어떤 과목에서 어려움을 느끼는지 ${dong}에서 미리 살펴보면 도움이 됩니다.`,`아래 ${dong} 과목·학년별 안내에서 세부 정보를 확인할 수 있습니다.`,`이 페이지는 ${subjTxt} 과목을 중심으로 ${dong}의 학습 방향을 안내합니다.`,`${dong} 학원 각 과목의 상세 페이지에서 더 구체적인 방법을 볼 수 있습니다.`,`${dong}에서 시작 시기를 고민 중이라면 지금 상황을 점검해 보세요.`])
+  ]});
+
+  const subjLines = subjs.slice(0,5).map(sj=>{
+    const info=SUBJ[sj]; const f=info?pick(rng,info.focus):"기초부터 다지는"; const tp=info?pick(rng,info.tip):"꾸준한 반복 학습"; const vb=info?pick(rng,info.verb):"기본기를 다지고";
+    return `${dong}에서 ${sj}는 ${f} 학습이 필요하며, ${tp}을 통해 실력을 쌓아 갈 수 있습니다. ${vb} 과정을 반복하면 ${sj} 실력이 자리 잡습니다.`;
+  });
+  P.push({h:`${area}에서 배울 수 있는 과목`, t:[
+    P2(rng,[`${dong} 지역 학원에서는 ${subjTxt} 등 다양한 과목을 다루고 있습니다.`,`현재 ${dong}에서는 ${subjTxt} 과목을 중심으로 수업이 이루어집니다.`,`${dong} 학원들은 ${subjTxt}를 ${lvTxt} 과정에 맞춰 지도합니다.`,`${dong}에서 배울 수 있는 과목은 ${subjTxt}로, 학년에 따라 반이 나뉩니다.`,`${sgg} ${dong}의 학원은 ${subjTxt}를 폭넓게 다룹니다.`,`${dong}에서는 주요 과목을 ${lvTxt} 단계별로 안내합니다.`,`${dong} 학원의 ${subjTxt} 수업은 학년별 목표에 맞춰 운영됩니다.`],
+          [`같은 과목이라도 학년에 따라 내용과 난이도가 달라, ${dong}에서는 단계에 맞는 반을 고르는 것이 중요합니다.`,`${dong} 학원에서도 학년이 오를수록 개념의 폭과 깊이가 넓어집니다.`,`저학년은 기초와 습관을, 고학년은 응용과 내신·수능 대비로 방향이 나뉩니다.`,`${dong}에서는 아이의 단계에 맞춰 진도와 교재를 조절합니다.`,`무리한 선행보다 지금 학년의 이해를 정확히 하는 편이 오래 남습니다.`,`${dong} 학원마다 반 편성 기준이 달라 상담으로 확인하는 것이 좋습니다.`]),
+    ...subjLines,
+    P2(rng,[`${dong}에서 여러 과목을 한 곳에서 관리하면 학습 일정을 묶어 효율적으로 운영할 수 있습니다.`,`주력 과목과 보조 과목을 함께 설계하면 ${dong}에서의 전체 성적 관리에 도움이 됩니다.`,`${dong} 학원마다 과목별 지도 여부와 반 편성이 다르므로 상담으로 확인하는 것이 좋습니다.`,`아이가 특히 어려워하는 과목이 있다면 ${dong}에서 그 과목의 기초부터 다시 점검하는 것을 권합니다.`,`${dong}에서 한 과목에 자신감이 붙으면 다른 과목으로도 학습 태도가 이어집니다.`,`과목별로 목표를 나눠 두면 ${dong} 학습의 우선순위를 정하기 쉬워집니다.`])
+  ]});
+
+  P.push({h:`${dong} 학년별 학습 방향`, t:[
+    P2(rng,[`${dong}의 초등 단계에서는 학습 습관을 만들고 기초 개념을 탄탄히 다지는 것이 중요합니다.`,`${dong} 초등 시기에는 공부에 대한 흥미를 잃지 않도록 성취 경험을 쌓아 주는 것이 좋습니다.`,`초등 과정은 ${dong}에서 기본기와 바른 학습 태도를 함께 잡아 가는 시기입니다.`,`이때 만들어진 스스로 공부하는 습관은 이후 중·고등 학습의 바탕이 됩니다.`,`${dong}에서 기초가 단단하면 학년이 올라가도 흔들리지 않고 따라갈 수 있습니다.`,`초등 단계에서는 무리한 선행보다 이해 중심의 학습이 오래 남습니다.`]),
+    P2(rng,[`${dong} 중학 단계에서는 내신 시험과 서술형 대비가 본격적으로 시작됩니다.`,`중학 과정은 ${dong} 학교 시험 범위에 맞춘 준비와 개념의 응용이 함께 필요한 시기입니다.`,`${dong} 중학 시기에는 과목별로 부족한 부분을 찾아 보완하는 관리가 중요합니다.`,`${dong} 인근 학교의 출제 경향에 맞춰 준비하면 내신 관리에 도움이 됩니다.`,`시험 기간에는 기출 분석과 오답 정리를 병행하는 것이 효과적입니다.`,`중학 성적은 ${dong} 아이의 고등 학습 방향을 정하는 기준이 되기도 합니다.`]),
+    P2(rng,[`${dong} 고교 단계에서는 내신과 수능을 함께 고려한 전략적인 학습이 필요합니다.`,`고등 과정은 ${dong}에서 시간 관리와 취약 단원 보완이 성적을 좌우하는 시기입니다.`,`고교 시기에는 목표 대학과 전형에 맞춘 과목별 우선순위 설정이 중요합니다.`,`한정된 시간 안에서 효율적으로 공부하려면 계획과 점검이 뒷받침되어야 합니다.`,`약한 개념을 집중 보완하면서 실전 감각을 함께 길러 가는 것이 좋습니다.`,`꾸준한 자기주도 학습이 결국 ${dong} 고등 성적의 바탕이 됩니다.`])
+  ]});
+
+  if(sc){ P.push({h:`${dong} 인근 학교 내신 대비`, t:[
+    P2(rng,[`${dong} 주변에는 ${sc} 등의 학교가 있어, 학교별 시험 범위와 출제 경향에 맞춘 준비가 필요합니다.`,`${sc} 같은 인근 학교는 과목별 출제 유형이 서로 달라 지역을 잘 아는 곳이 유리합니다.`,`${dong} 일대 ${sc} 등의 학사 일정에 맞춰 진도와 시험 대비를 조절하는 것이 좋습니다.`,`학교마다 진도와 난이도가 달라, ${dong}에서는 다니는 학교에 맞춘 관리가 성적으로 이어집니다.`,`${dong} 학교 시험 일정을 미리 반영해 계획을 세우면 여유 있게 준비할 수 있습니다.`,`같은 ${dong}이라도 학교별 특성을 아는 곳일수록 시험 대비가 촘촘합니다.`]),
+    P2(rng,[`시험 기간에는 ${dong} 학교별 기출을 살펴 집중적으로 대비하는 것이 효과적입니다.`,`평소에는 학교 진도에 맞춰 예습과 복습을 병행하는 흐름이 도움이 됩니다.`,`내신은 결국 ${dong} 학교 시험에 얼마나 맞춰 준비하느냐에 따라 결과가 달라집니다.`,`서술형 비중이 높아지는 만큼 답안 작성 연습도 함께 해 두면 좋습니다.`,`${dong} 학교들의 출제 패턴을 파악해 두면 시험이 다가와도 흔들리지 않습니다.`,`중간·기말 전에는 취약 단원을 먼저 점검하는 것이 시간을 아끼는 방법입니다.`])
+  ]}); }
+
+  P.push({h:`${dong} 학원의 학습 관리`, t:[
+    P2(rng,[`${dong}의 좋은 학원은 답을 먼저 알려 주기보다 학생이 스스로 계획하고 실천하도록 이끌어 줍니다.`,`성적의 바탕에는 스스로 공부하는 습관이 있고, ${dong}에서는 꾸준한 관리 속에서 이 습관이 자랍니다.`,`수업 시간만으로는 충분하지 않아, ${dong} 학원의 복습과 점검까지 이어지는 관리가 중요합니다.`,`${dong}에서 실력이 오르는 아이들은 대체로 스스로 공부하는 힘이 길러진 경우가 많습니다.`,`관리가 촘촘한 ${dong} 학원일수록 아이가 놓친 부분을 빠르게 찾아 채워 줍니다.`,`${dong} 학원을 고를 때 관리 방식을 먼저 확인하면 실패가 줄어듭니다.`]),
+    P2(rng,[`${dong} 학원에서는 학습 플래너로 매일의 진행을 확인하고, 틀린 문제를 다시 짚으며 약점을 채워 갑니다.`,`수준에 맞춰 과제를 나누고 학습량을 조금씩 늘려 가면 부담 없이 실력을 쌓을 수 있습니다.`,`오답 정리와 개념 확인을 반복하며 빈틈을 메우는 과정이 ${dong}에서 성적으로 이어집니다.`,`${dong}에서 계획을 세우고 실행하는 경험이 쌓이면서 아이는 스스로 공부하는 힘을 기릅니다.`,`작은 성취가 모이면 학습 자신감으로 이어지고, 이는 다른 과목으로도 번져 갑니다.`,`진도를 서두르기보다 정확한 이해를 먼저 챙기는 편이 오래 남습니다.`]),
+    P2(rng,[`가정과 ${dong} 학원이 함께 챙길 때 학습 효과가 커지므로 진행 상황을 정기적으로 공유받는 것이 좋습니다.`,`아이의 하루와 학습 리듬을 함께 살피는 관리가 결국 꾸준함을 만듭니다.`,`정기 상담을 통해 방향을 점검하면 ${dong}에서의 시행착오를 줄일 수 있습니다.`,`학부모와의 소통이 원활한 ${dong} 학원일수록 아이의 변화를 빠르게 확인할 수 있습니다.`,`집에서의 학습 습관과 ${dong} 학원의 관리가 맞물릴 때 성과가 뚜렷해집니다.`,`아이의 감정과 컨디션까지 살피는 관리가 꾸준한 학습으로 이어집니다.`])
+  ]});
+
+  P.push({h:`${dong}에서 학원 상담 시작하기`, t:[
+    P2(rng,[`${dong}에서 학원을 고를 때는 수업 내용뿐 아니라 분위기와 관리 체계도 함께 살펴보는 것이 좋습니다.`,`처음이라면 ${dong} 방문상담으로 아이의 현재 수준을 확인하고 학습 방향을 함께 잡아 보세요.`,`상담을 통해 지금 위치와 목표를 정리한 뒤 시작하면 헤매는 시간을 줄일 수 있습니다.`,`${dong} 학원 상담에서는 아이의 강점과 약점을 함께 짚어 보는 것이 좋습니다.`,`처음 ${dong}에서 학원을 알아본다면 두세 곳을 비교 상담해 보길 권합니다.`,`상담 때 ${dong} 학교 일정과 아이의 목표를 함께 이야기하면 방향이 분명해집니다.`]),
+    P2(rng,[`통학 거리, 관리 방식, 상담 체계를 함께 비교해 ${dong}에서 아이에게 맞는 곳을 정하면 오래 다닐 수 있습니다.`,`조용한 환경과 꾸준한 상담이 있는 ${dong} 학원일수록 학습이 안정적으로 이어집니다.`,`학습 진행 상황을 정기적으로 공유받을 수 있는지 미리 확인해 두면 좋습니다.`,`아래 ${dong} 학원 목록에서 가까운 곳을 골라 상담을 신청해 볼 수 있습니다.`,`정확한 수업 시간과 교습비는 지역·과목·학년에 따라 다를 수 있으므로 각 학원에 방문상담으로 확인하시기 바랍니다.`,`여러 곳을 비교해 본 뒤 아이가 편안해하는 ${dong} 학원을 선택하는 것이 좋습니다.`])
+  ]});
+
+  P.push({h:`${dong} 학습 환경과 통학`, t:[
+    P2(rng,[`${dong}에서 학원을 정할 때는 통학 거리와 안전도 함께 고려하게 됩니다.`,`가까운 거리에서 꾸준히 다닐 수 있는 ${dong} 학원일수록 학습 흐름이 끊기지 않습니다.`,`아이가 스스로 오갈 수 있는 동선 안에 있는 곳이 오래 다니기에 좋습니다.`,`${sgg} ${dong}은 ${lvTxt} 학생을 둔 가정이 많아 학원 선택의 폭이 넓은 편입니다.`,`${dong} 주변에 학교와 편의시설이 가까워 학습과 생활을 함께 챙기기 좋습니다.`,`${alias?alias+" 생활권을 중심으로 ":""}${dong}에 학원이 모여 있어 비교와 선택이 수월합니다.`]),
+    P2(rng,[`조용하고 집중할 수 있는 환경인지, 학습 공간이 잘 갖춰져 있는지 ${dong}에서 살펴보는 것이 좋습니다.`,`자습 공간과 질문할 수 있는 분위기가 마련된 ${dong} 학원일수록 학습 효율이 높습니다.`,`아이가 편안하게 머물 수 있는 환경이 결국 꾸준한 등원으로 이어집니다.`,`등·하원 시간과 수업 요일도 아이의 생활 리듬에 맞는지 미리 확인해 두면 좋습니다.`,`무리한 일정보다 꾸준히 지킬 수 있는 ${dong} 시간표가 학습에 도움이 됩니다.`,`통학 부담이 적을수록 아이도 학부모도 오래 유지하기 수월합니다.`])
+  ]});
+
+  P.push({h:`${dong} 학부모님께 드리는 안내`, t:[
+    P2(rng,[`아이마다 학습 속도와 성향이 다르므로, ${dong}에서도 남과 비교하기보다 우리 아이의 어제와 오늘을 비교하는 것이 좋습니다.`,`성적은 한 번에 오르지 않으며, ${dong} 학원의 꾸준한 관리가 쌓여 결과로 이어집니다.`,`조급함보다 아이의 속도를 존중하는 태도가 오래가는 학습을 만듭니다.`,`가정에서의 작은 관심과 격려가 ${dong} 아이의 학습 동기에 큰 영향을 줍니다.`,`${dong} 학원과 가정이 같은 방향을 바라볼 때 아이의 변화가 뚜렷해집니다.`,`아이가 스스로 해내는 경험을 쌓도록 기다려 주는 것도 중요합니다.`]),
+    P2(rng,[`정기 상담을 통해 ${dong} 아이의 학습 상황을 공유받고, 궁금한 점은 편하게 문의해 보세요.`,`학습 계획이나 진도 고민이 있다면 ${dong} 학원 상담에서 함께 방향을 잡을 수 있습니다.`,`아이의 변화가 느껴질 때 그 부분을 함께 나누는 것도 큰 힘이 됩니다.`,`${dong}에서 아이에게 맞는 학원을 찾는 과정이 스스로 공부하는 힘을 기르는 시작이 되길 바랍니다.`,`이 페이지의 정보가 ${dong} 학원을 고르는 데 도움이 되었으면 합니다.`,`아래 ${dong} 안내에서 과목과 학년을 선택해 더 자세한 내용을 확인해 보세요.`])
+  ]});
+
+  P.push({h:`${dong} 학원, 고를 때 살펴볼 점`, t:[
+    P2(rng,[`먼저 아이의 현재 수준을 정확히 진단하고, ${dong}에서 그에 맞는 단계부터 시작하는 곳인지 확인해 보세요.`,`진단 없이 진도만 나가는 곳보다, ${dong}에서 부족한 부분을 찾아 채워 주는 곳이 오래 도움이 됩니다.`,`아이가 어디서 막히는지 파악하고 그 지점을 보완해 주는 관리가 중요합니다.`,`${dong} 학원을 비교할 때는 반 편성과 진도 관리 방식을 함께 물어보는 것이 좋습니다.`,`아이 수준을 먼저 진단하는 ${dong} 학원일수록 시작이 안정적입니다.`,`${dong}에서 오래 다닐 곳을 찾는다면 관리와 소통 방식을 눈여겨보세요.`]),
+    P2(rng,[`수업 뒤 복습과 점검이 이어지는지, 과제와 오답 관리가 이루어지는지도 ${dong}에서 함께 보는 것이 좋습니다.`,`수업만 듣고 끝나는 것이 아니라 스스로 소화하는 과정까지 챙기는 곳이 좋습니다.`,`선생님과 아이의 소통이 편안한지, 질문하기 좋은 분위기인지도 학습에 큰 영향을 줍니다.`,`모르는 것을 편하게 물어볼 수 있는 환경이 학습 태도를 바꿔 놓기도 합니다.`,`학교별 내신 관리와 시험 대비를 어떻게 운영하는지도 ${dong}에서 미리 확인해 두면 좋습니다.`,`같은 조건이라면 아이가 편안해하고 다니고 싶어 하는 ${dong} 학원을 고르는 것이 좋습니다.`])
+  ]});
+
+  P.push({h:`${dong} 학원 자주 묻는 질문`, t:[
+    P2(rng,[`${dong}에서 기초가 부족한데 시작해도 괜찮은지 궁금해하는 분이 많습니다.`,`현재 수준을 진단한 뒤 맞는 단계부터 시작하므로, 기초가 부족해도 자기 속도로 학습할 수 있습니다.`,`늦게 시작하더라도 출발점을 정확히 잡으면 충분히 따라갈 수 있습니다.`,`어느 학년부터 다니는 것이 좋은지 묻는 경우도 많습니다.`,`학습 습관을 일찍 잡을수록 이후가 수월하지만, 어느 시기든 시작하는 그때가 가장 빠른 때입니다.`,`아이의 상황에 맞춰 ${dong}에서 시작 시기를 정하면 됩니다.`]),
+    P2(rng,[`수업 시간과 교습비가 궁금하다면 ${dong} 방문상담으로 안내받으실 수 있습니다.`,`지역과 과목, 학년에 따라 다르므로 각 학원에 직접 확인하는 것이 정확합니다.`,`상담에서 아이에게 맞는 반과 일정을 함께 정할 수 있습니다.`,`${dong} 학원에 대해 더 알고 싶다면 아래 목록에서 가까운 곳에 문의해 보세요.`,`과목별·학년별 상세 안내도 함께 확인하면 선택에 도움이 됩니다.`,`궁금한 점은 전화나 문의하기를 통해 편하게 물어볼 수 있습니다.`])
+  ]});
+
+  const html=P.map(sec=>`<section class="sec"><h2>${esc(sec.h)}</h2>${sec.t.map(x=>`<p>${x}</p>`).join("")}</section>`).join("");
+  return dpStyle(html);
 }
-function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교"]); }
+function dpStyle(x){ return x; }
 function pageDong(dong, chere){
   const idx=buildIndex(); const sgg=chere[0].sgg; const sido=chere[0].sido;
   const alias=centerAlias(chere); const areatype=centerAreatype(chere);
@@ -1049,10 +1120,10 @@ function pageHome(){
 
 <section class="sec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
-<div class="pc"><div class="pcic">🔍</div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
-<div class="pc"><div class="pcic">📋</div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
-<div class="pc"><div class="pcic">🗣️</div><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
-<div class="pc"><div class="pcic">✏️</div><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
+<div class="pc"><div class="pcnum">01</div><div class="pcic">🔍</div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
+<div class="pc"><div class="pcnum">02</div><div class="pcic">📋</div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
+<div class="pc"><div class="pcnum">03</div><div class="pcic">🗣️</div><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
+<div class="pc"><div class="pcnum">04</div><div class="pcic">✏️</div><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
 </div></section>
 
 <section class="sec"><h2>⚖️ 일반 수업과 무엇이 다른가요</h2>
@@ -1072,11 +1143,11 @@ function pageHome(){
 <p>계획하고 실행하는 경험이 쌓이면서 자기주도 학습의 기초 체력이 자랍니다.</p>
 </div><div class="pslider" id="ps_mgmt1"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a11.jpg" alt="플랜 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a12.jpg" alt="플랜 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a13.jpg" alt="플랜 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
-<div class="mgmt rev"><div class="pslider" id="ps_mgmt2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b11.jpg" alt="학습 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b12.jpg" alt="학습 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b13.jpg" alt="학습 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div><div>
+<div class="mgmt"><div>
 <span class="tag">아이에게 맞는 방식으로</span><h3>학습 관리</h3>
 <p>진도만 빠르게 나가지 않습니다. <b>현재 수준과 이해도에 맞춘 교재와 공부법</b>으로 기초부터 다집니다.</p>
 <p>오답노트, 백지노트 같은 도구로 <b>나에게 맞는 공부 방법</b>을 찾아가면, 성적은 자연스럽게 따라옵니다.</p>
-</div></div>
+</div><div class="pslider" id="ps_mgmt2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b11.jpg" alt="학습 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b12.jpg" alt="학습 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b13.jpg" alt="학습 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
 <div class="mgmt"><div>
 <span class="tag">학원 밖에서도 이어지는</span><h3>생활 관리</h3>
