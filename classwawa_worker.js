@@ -304,7 +304,7 @@ function layout({title,desc,canonical,jsonld,body,crumb,image}){
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="google-site-verification" content="REPLACE_GOOGLE_VERIFICATION" />
 <meta name="naver-site-verification" content="d115c36a973b4dd8f53b5614b1b79da31b6a7655" />
-<meta name="msvalidate.01" content="REPLACE_BING_VERIFICATION" />
+<meta name="msvalidate.01" content="3f8f40c67cfd4546a9c958030357f5ec" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3"><link rel="icon" type="image/png" sizes="96x96" href="/logo.png?v=3"><link rel="shortcut icon" href="/favicon.ico?v=3">
 <link rel="apple-touch-icon" href="/logo.png">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:site_name" content="${SITE_NAME}"><meta property="og:image" content="${image||SITE_URL+'/logo.png'}">
