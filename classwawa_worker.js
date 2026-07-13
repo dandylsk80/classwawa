@@ -405,7 +405,7 @@ async function submitInq(){
 const CSS = `
 :root{--bg:#ffffff;--ink:#1c1f24;--sub:#6b7280;--line:#e5e7eb;--accent:#1f2937;--accent-d:#111827;--soft:#f3f4f6;--card:#fff;--warn-bg:#f9fafb;--warn-bd:#e5e7eb;--warn-ink:#4b5563}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f4f1ea;color:var(--ink);line-height:1.7;-webkit-text-size-adjust:100%}
+body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f4f1ea;color:var(--ink);line-height:1.7;-webkit-text-size-adjust:100%;word-break:keep-all;overflow-wrap:anywhere}
 .wrap{max-width:880px;margin:0 auto;padding:0 20px}
 .hd{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .hd .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
