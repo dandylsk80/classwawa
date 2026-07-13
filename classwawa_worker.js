@@ -774,8 +774,6 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 프로세스 4카드 */
 .proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:64px 0 40px;position:relative}
 .procsec{padding:56px 0 64px;margin:24px 0}
-.pcic{overflow:hidden;padding:0}
-.pcic img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
 .procsec>h2{margin-bottom:6px}
 .faqsec{padding:64px 0 72px;margin:24px 0}
 .faqsec>h2{margin-bottom:18px}
@@ -870,6 +868,15 @@ html,body{overflow-x:clip;max-width:100%}
 .ftbrand{font-family:'Jua',system-ui,sans-serif;display:inline-flex;align-items:baseline;gap:.22em}
 .ftbrand .wname{filter:drop-shadow(0 1px 4px rgba(6,182,212,.55))}
 @media(max-width:600px){.logo .logotxt{font-size:17px}}
+/* ===== 처리 카드: 이미지 풀 배경 + 글씨 오버레이 ===== */
+.proc4 .pc{background:#0d1117;border:none;overflow:visible;min-height:232px;padding:46px 16px 22px;display:flex;flex-direction:column;justify-content:flex-end;text-align:center}
+.proc4 .pc .pcbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:18px;z-index:0;transition:transform .3s}
+.proc4 .pc::before{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(180deg,rgba(0,0,0,.16),rgba(0,0,0,.34) 48%,rgba(0,0,0,.78));z-index:1}
+.proc4 .pc b,.proc4 .pc p{position:relative;z-index:2}
+.proc4 .pc b{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.proc4 .pc p{color:rgba(255,255,255,.93);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.proc4 .pc .pcnum{z-index:3}
+.proc4 .pc:hover .pcbg{transform:scale(1.05)}
 `;
 
 // ---------- 페이지: 동+과목+대상 ----------
@@ -1211,10 +1218,10 @@ function pageHome(){
 
 <section class="sec procsec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
-<div class="pc"><div class="pcnum">01</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/51.jpg" alt="맞춤 진단" loading="lazy"></div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
-<div class="pc"><div class="pcnum">02</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/52.jpg" alt="맞춤 계획" loading="lazy"></div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
-<div class="pc"><div class="pcnum">03</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/53.jpg" alt="맞춤 상담" loading="lazy"></div><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
-<div class="pc"><div class="pcnum">04</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/54.jpg" alt="맞춤 지도" loading="lazy"></div><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
+<div class="pc"><div class="pcnum">01</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/51.jpg" alt="맞춤 진단" loading="lazy"><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
+<div class="pc"><div class="pcnum">02</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/52.jpg" alt="맞춤 계획" loading="lazy"><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
+<div class="pc"><div class="pcnum">03</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/53.jpg" alt="맞춤 상담" loading="lazy"><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
+<div class="pc"><div class="pcnum">04</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/54.jpg" alt="맞춤 지도" loading="lazy"><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
 </div></section>
 
 <section class="sec"><h2>⚖️ 일반 수업과 무엇이 다른가요</h2>
