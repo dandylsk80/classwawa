@@ -774,6 +774,8 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 /* 프로세스 4카드 */
 .proc4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:64px 0 40px;position:relative}
 .procsec{padding:56px 0 64px;margin:24px 0}
+.pcic{overflow:hidden;padding:0}
+.pcic img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
 .procsec>h2{margin-bottom:6px}
 .faqsec{padding:64px 0 72px;margin:24px 0}
 .faqsec>h2{margin-bottom:18px}
@@ -1209,10 +1211,10 @@ function pageHome(){
 
 <section class="sec procsec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
-<div class="pc"><div class="pcnum">01</div><div class="pcic">🔍</div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
-<div class="pc"><div class="pcnum">02</div><div class="pcic">📋</div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
-<div class="pc"><div class="pcnum">03</div><div class="pcic">🗣️</div><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
-<div class="pc"><div class="pcnum">04</div><div class="pcic">✏️</div><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
+<div class="pc"><div class="pcnum">01</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/51.jpg" alt="맞춤 진단" loading="lazy"></div><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
+<div class="pc"><div class="pcnum">02</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/52.jpg" alt="맞춤 계획" loading="lazy"></div><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
+<div class="pc"><div class="pcnum">03</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/53.jpg" alt="맞춤 상담" loading="lazy"></div><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
+<div class="pc"><div class="pcnum">04</div><div class="pcic"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/54.jpg" alt="맞춤 지도" loading="lazy"></div><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
 </div></section>
 
 <section class="sec"><h2>⚖️ 일반 수업과 무엇이 다른가요</h2>
