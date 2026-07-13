@@ -877,6 +877,7 @@ html,body{overflow-x:clip;max-width:100%}
 .proc4 .pc p{color:rgba(255,255,255,.93);text-shadow:0 1px 4px rgba(0,0,0,.5)}
 .proc4 .pc .pcnum{z-index:3}
 .proc4 .pc:hover .pcbg{transform:scale(1.05)}
+.hero h1 .wname{font-size:1.02em;transform:rotate(-1.5deg);filter:drop-shadow(0 2px 7px rgba(0,0,0,.5))}
 `;
 
 // ---------- 페이지: 동+과목+대상 ----------
@@ -1194,7 +1195,7 @@ function pageHome(){
   const faqLd=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage","mainEntity":homeFaqs.map(f=>({"@type":"Question","name":f[0],"acceptedAnswer":{"@type":"Answer","text":f[1]}}))});
 
   const springHoles = Array.from({length:9},(_,i)=>`<span style="top:${36+i*64}px"></span>`).join("");
-  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><h1><span class="accent">아이 스스로</span> 공부하는 힘,<br>와와학원이 함께합니다</h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지<br>우리 동네 가까운 지점에서 시작하세요</p><div class="herofind"><a href="/regions" class="hfindbtn">🔎 지역별 학원 찾기</a></div><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
+  const body=`<div class="hero"><div class="springbar">${springHoles}</div><span class="deco d1">📚</span><span class="deco d2">🎓</span><span class="deco d3">📐</span><h1><span class="accent">아이 스스로</span> 공부하는 힘,<br>우리동네 <span class="wname">와와</span> 학원이 함께합니다</h1><p>국어·영어·수학·과학·사회, 초등부터 고등까지<br>우리 동네 가까운 지점에서 시작하세요</p><div class="herofind"><a href="/regions" class="hfindbtn">🔎 지역별 학원 찾기</a></div><div class="stat"><div><b>${totalCenter}</b>등록 학원</div><div><b>${totalDong}</b>동네</div><div><b>${sidos.length}</b>시·도</div></div><div class="herobtns"><a class="hcall" href="tel:${PHONE_TEL}">📞 ${PHONE}</a><button class="hinq" onclick="openInq()">✉️ 문의하기</button></div></div>
 
 <section class="sec"><h2>📚 과목별 학원</h2><p class="subt">국어·영어·수학·과학·사회, 초·중·고 전 과목 학원 정보를 안내합니다.</p><div class="subjgrid">${subjCards}</div></section>
 <div class="band">
