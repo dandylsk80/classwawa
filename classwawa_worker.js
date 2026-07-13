@@ -510,11 +510,11 @@ h1{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1.28;margin-b
 .pointbox li{position:relative;padding-left:20px;font-size:14.5px;color:#3a4149}
 .pointbox li::before{content:"›";position:absolute;left:6px;color:var(--accent);font-weight:700}
 .dlead{font-size:16px;color:var(--ink);font-weight:500;margin:6px 0 14px;line-height:1.75}
-.subjgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:14px 0 6px}
-.subjcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.subjcard .sh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px}
-.subjcard .sh .si{font-size:16px}
-.subjcard p{font-size:13.7px;color:var(--sub);line-height:1.62;margin:0}
+.dsubgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:14px 0 6px}
+.dsubcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.dsubcard .dsh{display:flex;align-items:center;gap:7px;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:6px}
+.dsubcard .dsh .dsi{font-size:16px}
+.dsubcard p{font-size:13.7px;color:var(--sub);line-height:1.62;margin:0}
 .callout{background:var(--soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 18px;margin:12px 0 4px}
 .callout p{margin:0 0 8px;color:#3a4149;font-size:14.5px;line-height:1.65}
 .callout p:last-child{margin:0}
@@ -1085,7 +1085,7 @@ function dongProse(dong,sgg,sido,alias,chere){
       inner = (t[0]?`<p class="dlead">${t[0]}</p>`:"") + t.slice(1).map(x=>`<p>${x}</p>`).join("");
     } else if(sec.type==="subj"){
       inner = `<p>${sec.intro}</p>`
-        + `<div class="subjgrid">${(sec.cards||[]).map(c=>`<div class="subjcard"><div class="sh"><span class="si">${c.icon}</span>${esc(c.name)}</div><p>${esc(c.text)}</p></div>`).join("")}</div>`
+        + `<div class="dsubgrid">${(sec.cards||[]).map(c=>`<div class="dsubcard"><div class="dsh"><span class="dsi">${c.icon}</span>${esc(c.name)}</div><p>${esc(c.text)}</p></div>`).join("")}</div>`
         + `<p>${sec.close}</p>`;
     } else if(sec.type==="steps"){
       const labels = sec.stepLabels||[];
