@@ -302,7 +302,9 @@ function layout({title,desc,canonical,jsonld,body,crumb,image}){
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(canonical)}">
-<meta name="naver-site-verification" content="REPLACE_NAVER_VERIFICATION" />
+<meta name="google-site-verification" content="REPLACE_GOOGLE_VERIFICATION" />
+<meta name="naver-site-verification" content="d115c36a973b4dd8f53b5614b1b79da31b6a7655" />
+<meta name="msvalidate.01" content="REPLACE_BING_VERIFICATION" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3"><link rel="icon" type="image/png" sizes="96x96" href="/logo.png?v=3"><link rel="shortcut icon" href="/favicon.ico?v=3">
 <link rel="apple-touch-icon" href="/logo.png">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:site_name" content="${SITE_NAME}"><meta property="og:image" content="${image||SITE_URL+'/logo.png'}">
@@ -1345,7 +1347,7 @@ ${itemXml}
   return new Response(xml,{headers:{"content-type":"application/rss+xml; charset=utf-8"}});
 }
 function llmsTxt(){ const idx=buildIndex(); const dongs=Object.keys(idx.byDong).slice(0,60); const lines=["# "+SITE_NAME,"","> "+SITE_NAME+"는 전국 와와학습코칭 계열 학원 205개 지점을 지역·과목·학년별로 안내하는 학원 정보 사이트입니다.","","## 핵심 정보","- 지역: 전국 "+Object.keys(idx.bySido).length+"개 시·도","- 과목: 국어·영어·수학·과학·사회","- 대상: 초등·중학·고교","- 문의: "+PHONE,"","## 주요 페이지"]; lines.push("- 홈: "+SITE_URL+"/"); lines.push("- 지역 목록: "+SITE_URL+"/regions"); dongs.forEach(d=>lines.push("- "+d+": "+SITE_URL+urlDong(d))); return new Response(lines.join("\n"),{headers:{"content-type":"text/plain; charset=utf-8"}}); }
-function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`,{headers:{"content-type":"text/plain"}}); }
+function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n#DaumWebMasterTool:b088c6049dca14d95d9365d49409784120da4dabab9589768c62aeb3ce376cca:QmI+4F2t5jK1pbxPC/0WPA==\n`,{headers:{"content-type":"text/plain"}}); }
 
 // IndexNow: 전체 URL을 검색엔진에 즉시 제출
 async function indexnowPing(){
