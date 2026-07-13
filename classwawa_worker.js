@@ -345,7 +345,7 @@ const FLOATING = `<div class="floating">
 const INQUIRY_MODAL = `<div class="inqback" id="inqBack" onclick="if(event.target===this)closeInq()">
 <div class="inqbox">
 <button class="inqx" onclick="closeInq()" aria-label="닫기">×</button>
-<h3>문의 남기기</h3>
+<div id="iqForm"><h3>문의 남기기</h3>
 <p class="inqdesc">아래 내용을 남겨 주시면 빠르게 안내해 드립니다. (문의내용 외 모두 필수)</p>
 <div class="inqfield"><label>학생 이름 <em>*</em></label><input id="iqName" type="text" placeholder="학생 성함"></div>
 <div class="inqfield"><label>연락처 <em>*</em></label><input id="iqPhone" type="tel" placeholder="010-0000-0000"></div>
@@ -365,12 +365,13 @@ const INQUIRY_MODAL = `<div class="inqback" id="inqBack" onclick="if(event.targe
 <div class="inqfield"><label>문의 내용</label><textarea id="iqMsg" rows="3" placeholder="궁금하신 점을 적어 주세요 (선택)"></textarea></div>
 <button class="inqsubmit" onclick="submitInq()">문의 보내기</button>
 <a href="tel:${PHONE_TEL}" class="inqcall">📞 바로 전화하기 ${PHONE}</a>
-<p class="inqnote" id="iqNote"></p>
+<p class="inqnote" id="iqNote"></p></div>
+<div id="iqThanks" class="inqthanks" style="display:none"><div class="thmark">✓</div><h3>감사합니다!</h3><p>문의가 정상적으로 접수되었습니다.<br>확인 후 빠르게 연락드리겠습니다.</p><button class="inqsubmit" onclick="closeInq()">확인</button></div>
 </div></div>`;
 
 // 문의 JS
 const INQUIRY_JS = `
-function openInq(){document.getElementById('inqBack').style.display='flex';}
+function openInq(){var f=document.getElementById('iqForm'),t=document.getElementById('iqThanks'),n=document.getElementById('iqNote');if(f)f.style.display='';if(t)t.style.display='none';if(n)n.textContent='';document.getElementById('inqBack').style.display='flex';}
 function closeInq(){document.getElementById('inqBack').style.display='none';}
 function searchAddr(){
   if(typeof daum==='undefined'||!daum.Postcode){ alert('주소 검색을 불러오는 중입니다. 잠시 후 다시 시도해 주세요.'); return; }
@@ -402,7 +403,7 @@ async function submitInq(){
   if(!endpoint){note.style.color='#c0392b';note.textContent='문의 접수 준비 중입니다. 전화로 문의해 주세요.';return;}
   try{
     await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-    note.style.color='#374151';note.textContent='문의가 접수되었습니다. 곧 연락드리겠습니다.';
+    document.getElementById('iqForm').style.display='none';document.getElementById('iqThanks').style.display='block';
     ['iqName','iqPhone','iqAddr','iqAddrDetail','iqMsg'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('iqGrade').value='';document.getElementById('iqSubject').value='';
   }catch(e){ note.style.color='#c0392b';note.textContent='전송에 실패했습니다. 전화로 문의해 주세요.'; }
@@ -884,6 +885,10 @@ html,body{overflow-x:clip;max-width:100%}
 .proc4 .pc .pcnum{z-index:3}
 .proc4 .pc:hover .pcbg{transform:scale(1.05)}
 .hero h1 .wname{font-size:1.02em;transform:rotate(-1.5deg);filter:drop-shadow(0 2px 7px rgba(0,0,0,.5))}
+.inqthanks{text-align:center;padding:22px 6px 10px}
+.inqthanks .thmark{width:62px;height:62px;border-radius:50%;background:#2563eb;color:#fff;font-size:32px;line-height:62px;margin:0 auto 16px;font-weight:800}
+.inqthanks h3{margin-bottom:10px;font-size:1.25rem}
+.inqthanks p{color:var(--sub);margin-bottom:18px;line-height:1.65}
 `;
 
 // ---------- 페이지: 동+과목+대상 ----------
@@ -936,7 +941,7 @@ function pageSubject(dong, subj, lv, chere){
   const body = `${thumb}<h1>${esc(kw)}</h1>${dateBar}${aliasBadge}${summary}${toc}${secs}${schoolTbl}${cards}${cta}${related}${faqHtml}<div class="note">정확한 수업 시간 및 교습비는 지역별·과목별로 상이할 수 있습니다. 자세한 사항은 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sgg,url:urlDong(dong)},{name:kw}];
   const ttl = alias ? `${kw} (${alias}) | ${sgg} ${subj} 학원` : `${kw} | ${sgg} ${subj} 학원 정보`;
-  return layout({title:ttl, desc, canonical, jsonld, body, crumb, image:thumbFor(key)});
+  return layout({title:ttl, desc, canonical, jsonld, body, crumb, image:thumbFor(key), source:centerSource(chere)});
 }
 
 function parseFaq(text){
@@ -996,6 +1001,7 @@ function relatedChips(dong, subj, lv){
 // ---------- 페이지: 동 ----------
 function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교","초등부터 고등까지"]); }
 function P2(rng,pool){ const a=shuffle(rng,pool); return (a[0]||"")+" "+(a[1]||""); }
+function centerSource(arr){ if(!arr||!arr.length) return ""; const names=arr.map(c=>c.name).filter(Boolean); if(!names.length) return ""; return names.length<=3?names.join(", "):names.slice(0,3).join(", ")+" 외 "+(names.length-3)+"곳"; }
 function dongIcon(h){
   if(h.includes("이렇게 찾")) return "🔎";
   if(h.includes("배울 수 있는 과목")) return "📚";
@@ -1151,7 +1157,7 @@ function pageDong(dong, chere){
   const __dd=pageDates(`dong|${dong}`); const __dbar=`<div class="dates"><span>📅 발행일 <b>${__dd.publishedKor}</b></span><span>🔄 수정일 <b>${__dd.modifiedKor}</b></span></div>`; const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${__dbar}${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec" id="lvsec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sido,url:urlRegion(sido)},{name:dong}];
   const ttl=alias?`${dong} 학원 (${alias}) | ${sgg}`:`${dong} 학원 | ${sgg} 과목별 학원 정보`;
-  return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`)});
+  return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`), source:centerSource(chere)});
 }
 
 // ---------- 페이지: 센터 ----------
