@@ -288,7 +288,7 @@ function buildIndex(){
 }
 
 // ---------- 레이아웃 ----------
-function layout({title,desc,canonical,jsonld,body,crumb,image}){
+function layout({title,desc,canonical,jsonld,body,crumb,image,source}){
   const bc = crumb? `<nav class="bc">${crumb.map((c,i)=> c.url?`<a href="${c.url}">${esc(c.name)}</a>`:`<span>${esc(c.name)}</span>`).join(' <i>›</i> ')}</nav>`:"";
   // 브레드크럼 JSON-LD
   let bcLd = "";
@@ -301,6 +301,8 @@ function layout({title,desc,canonical,jsonld,body,crumb,image}){
   return `<!DOCTYPE html><html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}">
+<meta name="wa-source" content="${esc(source||(title||'').split(' | ')[0])}">
+
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="google-site-verification" content="REPLACE_GOOGLE_VERIFICATION" />
 <meta name="naver-site-verification" content="d115c36a973b4dd8f53b5614b1b79da31b6a7655" />
@@ -394,7 +396,9 @@ async function submitInq(){
   var fullAddr = addr + (addrDetail ? ' '+addrDetail : '');
   note.style.color='#5b636e';note.textContent='전송 중...';
   var endpoint=${JSON.stringify(INQUIRY_ENDPOINT)};
-  var payload={name:name,phone:phone,address:fullAddr,grade:grade,subject:subject,message:msg,page:location.href,time:new Date().toLocaleString('ko-KR')};
+  var srcMeta=document.querySelector('meta[name="wa-source"]');
+  var source=(srcMeta&&srcMeta.content)?srcMeta.content:(document.title||'').replace(/ \| .*$/,'').trim();
+  var payload={name:name,phone:phone,address:fullAddr,grade:grade,subject:subject,message:msg,source:source,page:location.href,time:new Date().toLocaleString('ko-KR')};
   if(!endpoint){note.style.color='#c0392b';note.textContent='문의 접수 준비 중입니다. 전화로 문의해 주세요.';return;}
   try{
     await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
@@ -1165,7 +1169,7 @@ ${schoolRows?`<section class="sec"><h2>인근 학교</h2><table class="schooltbl
 <section class="sec"><h2>학원 등록 정보</h2><table class="schooltbl"><tr><th>정식 명칭</th><td>${esc(c.name)}</td></tr><tr><th>등록</th><td>${esc(c.office)}</td></tr></table></section>
 <div class="note">상담은 예약제로 운영될 수 있습니다. 정확한 수업 시간 및 교습비는 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:c.sido,url:urlRegion(c.sido)},{name:c.dong,url:urlDong(c.dong)},{name:"학원 안내"}];
-  return layout({title:`${c.dong} 학원 | ${c.sgg} 학원 정보`, desc, canonical, jsonld, body, crumb});
+  return layout({title:`${c.dong} 학원 | ${c.sgg} 학원 정보`, desc, canonical, jsonld, body, crumb, source:c.name});
 }
 
 // ---------- 페이지: 메인 ----------
