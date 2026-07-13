@@ -960,6 +960,19 @@ function relatedChips(dong, subj, lv){
 // ---------- 페이지: 동 ----------
 function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교","초등부터 고등까지"]); }
 function P2(rng,pool){ const a=shuffle(rng,pool); return (a[0]||"")+" "+(a[1]||""); }
+function dongIcon(h){
+  if(h.includes("이렇게 찾")) return "🔎";
+  if(h.includes("배울 수 있는 과목")) return "📚";
+  if(h.includes("학년별")) return "🎓";
+  if(h.includes("인근 학교")) return "🏫";
+  if(h.includes("학습 관리")) return "🧭";
+  if(h.includes("상담 시작")) return "💬";
+  if(h.includes("환경과 통학")) return "🚸";
+  if(h.includes("학부모")) return "👪";
+  if(h.includes("살펴볼 점")) return "✅";
+  if(h.includes("자주 묻는")) return "❓";
+  return "📝";
+}
 function dongProse(dong,sgg,sido,alias,chere){
   const rng=seedRng(dong+"dpC1"+"waw3dp"); const n=chere.length;
   const area=alias?dong+"("+alias+")":dong;
@@ -1031,8 +1044,40 @@ function dongProse(dong,sgg,sido,alias,chere){
     P2(rng,[`수업 시간과 교습비가 궁금하다면 ${dong} 방문상담으로 안내받으실 수 있습니다.`,`지역과 과목, 학년에 따라 다르므로 각 학원에 직접 확인하는 것이 정확합니다.`,`상담에서 아이에게 맞는 반과 일정을 함께 정할 수 있습니다.`,`${dong} 학원에 대해 더 알고 싶다면 아래 목록에서 가까운 곳에 문의해 보세요.`,`과목별·학년별 상세 안내도 함께 확인하면 선택에 도움이 됩니다.`,`궁금한 점은 전화나 문의하기를 통해 편하게 물어볼 수 있습니다.`])
   ]});
 
-  const html=P.map(sec=>`<section class="sec"><h2>${esc(sec.h)}</h2>${sec.t.map(x=>`<p>${x}</p>`).join("")}</section>`).join("");
-  return dpStyle(html);
+  // ---- 가독성 렌더: 목차 + 섹션 아이콘 + 체크리스트 + FAQ 아코디언 ----
+  const faqSec = P.find(s=>s.h.includes("자주 묻는"));
+  const bodySecs = P.filter(s=>s!==faqSec);
+
+  const chkPool=[
+    `아이 수준을 먼저 진단하고 그에 맞는 단계부터 시작하는지`,
+    `수업 뒤 복습·과제·오답 관리가 이어지는지`,
+    `모르는 것을 편하게 물어볼 수 있는 분위기인지`,
+    `${dong} 인근 학교 내신·시험 대비를 어떻게 하는지`,
+    `반 편성과 진도 관리 기준이 명확한지`,
+    `통학 거리와 등·하원 시간이 아이 생활에 맞는지`,
+    `학습 진행 상황을 정기적으로 공유해 주는지`
+  ];
+  const chkItems = shuffle(rng,chkPool).slice(0,5);
+
+  const secHtml = bodySecs.map((sec,i)=>{
+    let inner = sec.t.map(x=>`<p>${x}</p>`).join("");
+    if(sec.h.includes("살펴볼 점")){
+      inner += `<ul class="checklist">${chkItems.map(it=>`<li>${esc(it)}</li>`).join("")}</ul>`;
+    }
+    return `<section class="sec" id="d${i}"><h2><span class="sicon">${dongIcon(sec.h)}</span>${esc(sec.h)}</h2>${inner}</section>`;
+  }).join("");
+
+  const faqPairs=[
+    [`${dong}에서 기초가 부족해도 시작할 수 있나요?`, pick(rng,[`현재 수준을 먼저 진단한 뒤 맞는 단계부터 시작하므로, 기초가 부족해도 자기 속도로 따라갈 수 있습니다.`,`출발점만 정확히 잡으면 늦게 시작해도 충분히 실력을 쌓을 수 있습니다.`,`부족한 부분을 찾아 기초부터 채워 가는 방식이라 처음이어도 괜찮습니다.`])],
+    [`몇 학년부터 다니는 것이 좋을까요?`, pick(rng,[`학습 습관을 일찍 잡을수록 이후가 수월하지만, 어느 시기든 시작하는 그때가 가장 빠른 때입니다.`,`아이의 상황과 목표에 맞춰 ${dong}에서 시작 시기를 정하면 됩니다.`,`초등은 습관, 중등은 내신, 고등은 전략 학습으로 시기별 목표가 다릅니다.`])],
+    [`수업 시간과 교습비는 어떻게 확인하나요?`, pick(rng,[`지역·과목·학년에 따라 다르므로 각 학원에 방문상담으로 확인하는 것이 정확합니다.`,`${dong} 방문상담에서 아이에게 맞는 반과 일정을 함께 정할 수 있습니다.`,`전화나 문의하기를 통해 수업 시간과 교습비를 안내받을 수 있습니다.`])],
+    [`${dong}에서 학원을 고를 때 무엇을 봐야 하나요?`, pick(rng,[`수업 내용뿐 아니라 관리 방식, 분위기, 통학 거리를 함께 비교하는 것이 좋습니다.`,`진단·관리·소통이 이어지는 곳일수록 오래 다니기 좋습니다.`,`아이가 편안해하고 다니고 싶어 하는 곳을 고르면 학습이 꾸준해집니다.`])]
+  ];
+  const faqHtml = `<section class="sec" id="dfaq"><h2><span class="sicon">❓</span>${esc(dong)} 학원 자주 묻는 질문</h2><div class="faq">${faqPairs.map(f=>`<details><summary><span class="q">Q. ${esc(f[0])}</span></summary><div class="a">${esc(f[1])}</div></details>`).join("")}</div></section>`;
+
+  const toc = `<div class="toc"><h2>이 페이지에서 다루는 내용</h2><ul>${bodySecs.map((s,i)=>`<li><a href="#d${i}">${esc(s.h)}</a></li>`).join("")}<li><a href="#dfaq">자주 묻는 질문</a></li><li><a href="#lvsec">과목·학년별 학원</a></li><li><a href="#list">학원 목록</a></li></ul></div>`;
+
+  return dpStyle(toc+secHtml+faqHtml);
 }
 function dpStyle(x){ return x; }
 function pageDong(dong, chere){
@@ -1049,7 +1094,7 @@ function pageDong(dong, chere){
   const canonical=SITE_URL+urlDong(dong);
   const desc=alias?`${sgg} ${dong}(${alias}) 학원 정보. ${alias} 과목별·학년별 학원 안내.`:`${sgg} ${dong} 학원 정보. ${dong} 지역 과목별·학년별 학원 안내와 인근 학교 내신 대비 정보를 확인하세요.`;
   const thumb=thumbBlock(`dong|${dong}`, `${dong} 학원`, alias?`${sgg} ${dong} · ${alias}`:`${sido} ${sgg}`);
-  const __dd=pageDates(`dong|${dong}`); const __dbar=`<div class="dates"><span>📅 발행일 <b>${__dd.publishedKor}</b></span><span>🔄 수정일 <b>${__dd.modifiedKor}</b></span></div>`; const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${__dbar}${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
+  const __dd=pageDates(`dong|${dong}`); const __dbar=`<div class="dates"><span>📅 발행일 <b>${__dd.publishedKor}</b></span><span>🔄 수정일 <b>${__dd.modifiedKor}</b></span></div>`; const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${__dbar}${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec" id="lvsec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sido,url:urlRegion(sido)},{name:dong}];
   const ttl=alias?`${dong} 학원 (${alias}) | ${sgg}`:`${dong} 학원 | ${sgg} 과목별 학원 정보`;
   return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`)});
