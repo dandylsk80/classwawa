@@ -1001,7 +1001,7 @@ function relatedChips(dong, subj, lv){
 // ---------- 페이지: 동 ----------
 function LG_INTRO(rng){ return pick(rng,["초·중·고 전","다양한","초등·중학·고교","초등부터 고등까지"]); }
 function P2(rng,pool){ const a=shuffle(rng,pool); return (a[0]||"")+" "+(a[1]||""); }
-function centerSource(arr){ if(!arr||!arr.length) return ""; const names=arr.map(c=>c.name).filter(Boolean); if(!names.length) return ""; return names.length<=3?names.join(", "):names.slice(0,3).join(", ")+" 외 "+(names.length-3)+"곳"; }
+function centerSource(arr){ if(!arr||!arr.length) return ""; const names=arr.map(c=>{ const nm=c.name||""; if(!nm) return ""; return /점/.test(nm) ? nm : ((c.dong?c.dong+" ":"")+nm); }).filter(Boolean); if(!names.length) return ""; return names.length<=3?names.join(", "):names.slice(0,3).join(", ")+" 외 "+(names.length-3)+"곳"; }
 function dongIcon(h){
   if(h.includes("이렇게 찾")) return "🔎";
   if(h.includes("배울 수 있는 과목")) return "📚";
@@ -1175,7 +1175,7 @@ ${schoolRows?`<section class="sec"><h2>인근 학교</h2><table class="schooltbl
 <section class="sec"><h2>학원 등록 정보</h2><table class="schooltbl"><tr><th>정식 명칭</th><td>${esc(c.name)}</td></tr><tr><th>등록</th><td>${esc(c.office)}</td></tr></table></section>
 <div class="note">상담은 예약제로 운영될 수 있습니다. 정확한 수업 시간 및 교습비는 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:c.sido,url:urlRegion(c.sido)},{name:c.dong,url:urlDong(c.dong)},{name:"학원 안내"}];
-  return layout({title:`${c.dong} 학원 | ${c.sgg} 학원 정보`, desc, canonical, jsonld, body, crumb, source:c.name});
+  return layout({title:`${c.dong} 학원 | ${c.sgg} 학원 정보`, desc, canonical, jsonld, body, crumb, source:centerSource([c])});
 }
 
 // ---------- 페이지: 메인 ----------
