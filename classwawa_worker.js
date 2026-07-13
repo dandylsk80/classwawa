@@ -6,7 +6,7 @@ const SITE_NAME = "우리동네 와와 학원";
 const PHONE = "010-6834-8080";
 const PHONE_TEL = "01068348080";
 // 문의 저장용 Apps Script 웹앱 주소 (배포 후 여기에 붙여넣기)
-const INQUIRY_ENDPOINT = "REPLACE_APPS_SCRIPT_ENDPOINT";
+const INQUIRY_ENDPOINT = "https://script.google.com/macros/s/AKfycby1h0NDMaFjKe2kGm6ajvkN6tkVmqj4wmYCw5hGr1dJkDbuYq8VVvUSc8XBHhv-fsaV/exec";
 const INDEXNOW_KEY = "06428c67121444d98950184927cd1324"; // IndexNow 키 (Bing 발급, 파일: /06428c67121444d98950184927cd1324.txt)
 
 // 슬러그 역매핑
