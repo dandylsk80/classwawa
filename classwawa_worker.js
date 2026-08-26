@@ -326,7 +326,7 @@ ${INQUIRY_MODAL}
 <script>${INQUIRY_JS}</script>
 <script>(function(){var el=document.getElementById("bandSlider");if(!el)return;var tr=el.querySelector(".btrack"),dots=el.querySelectorAll(".bdot"),n=el.querySelectorAll(".bslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,6500);}function stop(){clearInterval(t);}el.querySelector(".bnext").onclick=function(){stop();nx();auto();};el.querySelector(".bprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();})();document.querySelectorAll(".pslider").forEach(function(el){var tr=el.querySelector(".ptrack"),dots=el.querySelectorAll(".pdot"),n=el.querySelectorAll(".pslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,6500);}function stop(){clearInterval(t);}el.querySelector(".pnext").onclick=function(){stop();nx();auto();};el.querySelector(".pprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();});</script><script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
 <script type="text/javascript">if(!window.wcs_add)var wcs_add={};wcs_add["wa"]="REPLACE_NAVER_ANALYTICS_WA";if(window.wcs){wcs_do();}</script>
-<script>(function(){function t(ty){try{fetch("/api/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:ty,page:location.pathname,ref:document.referrer})});}catch(e){}}if(location.pathname.indexOf("/api/")!==0)t("view");document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute&&a.getAttribute("href"))||"";if(h.indexOf("tel:")===0)t("tel");else if(h.indexOf("sms:")===0)t("sms");else if(a.className&&(""+a.className).indexOf("inqsubmit")>=0)t("contact");},true);})();</script>
+<script>(function(){function t(ty){try{fetch("/api/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:ty,page:location.pathname,ref:document.referrer}),keepalive:true});}catch(e){}}if(location.pathname.indexOf("/api/")!==0)t("view");document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a,button");if(!a)return;var h=(a.getAttribute&&a.getAttribute("href"))||"";if(h.indexOf("tel:")===0)t("tel");else if(h.indexOf("sms:")===0)t("sms");else if(a.className&&(""+a.className).indexOf("inqsubmit")>=0)t("contact");},true);})();</script>
 </body></html>`;
 }
 
@@ -1390,7 +1390,7 @@ function notFound(){ return new Response(layout({title:`페이지를 찾을 수 
 /* ─── 텔레그램 전환 알림 (템플릿 적용) ─── */
 const TG_TOKEN = '8101954996:AAGNV225WaNL8Zqh9OxtmP1WNzlbquNaq9s';
 const TG_CHAT  = '8649422714';
-const TG_LABEL = { tel: '전화 버튼 클릭', contact: '상담 버튼 클릭' };
+const TG_LABEL = { tel: '전화 버튼 클릭', sms: '문자 버튼 클릭', contact: '상담 버튼 클릭' };
 const TG_SITE   = '클래스와와';
 const TG_DOMAIN = 'classwawa.com';
 const TG_ORIGIN = 'https://classwawa.com';
