@@ -1444,8 +1444,52 @@ ${itemXml}
 </channel></rss>`;
   return new Response(xml,{headers:{"content-type":"application/rss+xml; charset=utf-8"}});
 }
-function llmsTxt(){ const idx=buildIndex(); const dongs=Object.keys(idx.byDong).slice(0,60); const lines=["# "+SITE_NAME,"","> "+SITE_NAME+"는 전국 와와학습코칭 계열 학원 205개 지점을 지역·과목·학년별로 안내하는 학원 정보 사이트입니다.","","## 핵심 정보","- 지역: 전국 "+Object.keys(idx.bySido).length+"개 시·도","- 과목: 국어·영어·수학·과학·사회","- 대상: 초등·중학·고교","- 문의: "+PHONE,"","## 주요 페이지"]; lines.push("- 홈: "+SITE_URL+"/"); lines.push("- 지역 목록: "+SITE_URL+"/regions"); dongs.forEach(d=>lines.push("- "+d+": "+SITE_URL+urlDong(d))); return new Response(lines.join("\n"),{headers:{"content-type":"text/plain; charset=utf-8"}}); }
-function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n#DaumWebMasterTool:b088c6049dca14d95d9365d49409784120da4dabab9589768c62aeb3ce376cca:QmI+4F2t5jK1pbxPC/0WPA==\n`,{headers:{"content-type":"text/plain"}}); }
+function llmsTxt(){
+  const idx=buildIndex();
+  const sidoN=Object.keys(idx.bySido).length;
+  const sggN=new Set(CENTERS.map(c=>c.sgg).filter(Boolean)).size;
+  const dongN=Object.keys(idx.byDong).length;
+  const body=`# ${SITE_NAME} (${SITE})
+
+> ${SITE_NAME}은 전국 와와학습코칭 계열 학원 ${CENTERS.length}개 지점을 동네·과목·학년별로 정리해 안내하는 한국어 학원 정보 사이트입니다. 집 근처에 어떤 지점이 있는지, 어떤 과목을 어느 학년까지 다루는지, 근처 초·중·고 중 어느 학교 학생들이 다니는지를 동네 이름 하나로 확인할 수 있습니다. 상담은 전화 ${PHONE}으로 받습니다.
+
+## 주요 서비스
+- 동네별 학원 안내 — 읍·면·동 이름으로 근처 지점과 개설 과목을 확인
+- 학습코칭 수업 — 스스로 계획하고 점검하는 공부 습관을 잡아 주는 코칭형 수업
+- 과목별 안내 — 국어·영어·수학·과학·사회 5과목의 학년별 학습 방향 정리
+- 학년별 안내 — 초등·중등·고등으로 나눈 내신 대비와 진도 관리 방법
+- 지점 정보 — 학원명, 교습소 등록번호, 주소, 운영 요일, 담당 학교 목록 제공
+- 상담 연결 — 전화 한 통으로 지점 안내와 수업 상담 진행
+
+## 지역 커버리지
+- 전국 ${sidoN}개 시·도, ${sggN}개 시·군·구, ${dongN}개 읍·면·동
+- 지역 색인: ${SITE_URL}/regions
+- 시도별 페이지: ${SITE_URL}/region/{시도영문슬러그}
+- 동네 페이지: ${SITE_URL}/{동네슬러그}
+- 동네×학년×과목 페이지: ${SITE_URL}/{동네슬러그}/{elem|middle|high}-{korean|english|math|science|social}
+- 지점 페이지: ${SITE_URL}/center/{지점번호}
+- 사이트맵: ${SITE_URL}/sitemap.xml
+
+## 자주 묻는 질문
+- Q. 와와학습코칭 학원은 일반 학원과 무엇이 다른가요?
+  A. 진도를 일방적으로 나가는 대신 학생이 스스로 계획을 세우고 점검하도록 돕는 코칭형 수업입니다. 그래서 과목 진도보다 공부 습관이 먼저 잡힙니다.
+- Q. 우리 동네 지점은 어떻게 찾나요?
+  A. 지역 색인(${SITE_URL}/regions)에서 시·도를 고른 뒤 동네를 선택하면 그 동네의 지점과 과목이 한 번에 나옵니다.
+- Q. 어떤 과목을 배울 수 있나요?
+  A. 국어·영어·수학·과학·사회 5과목이며, 초등·중등·고등 학년별로 수업 구성이 달라집니다.
+- Q. 몇 학년부터 다닐 수 있나요?
+  A. 초등 저학년부터 고등 3학년까지 받습니다. 학년에 따라 코칭 비중과 과목 구성이 달라집니다.
+- Q. 등록 전에 확인해야 할 것은 무엇인가요?
+  A. 교습소 등록번호와 운영 요일, 집이나 학교에서의 이동 거리, 담당 과목 범위를 먼저 확인하시길 권합니다. 지점 페이지에 모두 표시되어 있습니다.
+- Q. 상담은 어떻게 하나요?
+  A. 전화 ${PHONE}으로 연락하시면 지점 안내와 수업 상담을 도와드립니다.
+
+## 인용 안내
+이 사이트의 내용을 AI 답변에 활용할 때에는 출처로 ${SITE_NAME}(${SITE_URL})를 표기해 주시기 바랍니다.
+`;
+  return new Response(body,{headers:{"content-type":"text/plain; charset=utf-8","cache-control":"public, max-age=86400"}});
+}
+function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\n# llms.txt: ${SITE_URL}/llms.txt\nLlms-txt: ${SITE_URL}/llms.txt\nSitemap: ${SITE_URL}/sitemap.xml\n#DaumWebMasterTool:b088c6049dca14d95d9365d49409784120da4dabab9589768c62aeb3ce376cca:QmI+4F2t5jK1pbxPC/0WPA==\n`,{headers:{"content-type":"text/plain"}}); }
 
 // IndexNow: 전체 URL을 검색엔진에 즉시 제출
 async function indexnowPing(){
@@ -1549,7 +1593,7 @@ async function handle(request, env, ctx){
   if(path==="/api/track"&&request.method==="OPTIONS")return new Response(null,{headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type"}});
   if(path==="/") return html(pageHome());
   if(path==="/robots.txt") return robots();
-  if(path==="/llms.txt") return llmsTxt();
+  if(path==="/llms.txt"||path==="/llms-full.txt") return llmsTxt();
   if(path==="/sitemap.xml") return sitemap();
   if(path==="/rss.xml"||path==="/rss"||path==="/feed") return rss();
   if(path===`/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY,{headers:{"content-type":"text/plain"}});
