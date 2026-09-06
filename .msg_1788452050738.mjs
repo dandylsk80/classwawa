@@ -490,7 +490,7 @@ ${INQUIRY_MODAL}
 <script>${INQUIRY_JS}</script>
 <script>(function(){var el=document.getElementById("bandSlider");if(!el)return;var tr=el.querySelector(".btrack"),dots=el.querySelectorAll(".bdot"),n=el.querySelectorAll(".bslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,6500);}function stop(){clearInterval(t);}el.querySelector(".bnext").onclick=function(){stop();nx();auto();};el.querySelector(".bprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();})();document.querySelectorAll(".pslider").forEach(function(el){var tr=el.querySelector(".ptrack"),dots=el.querySelectorAll(".pdot"),n=el.querySelectorAll(".pslide").length,i=0,t;function go(k){i=(k+n)%n;tr.style.transform="translateX(-"+(i*100)+"%)";dots.forEach(function(d,j){d.classList.toggle("on",j===i);});}function nx(){go(i+1);}function auto(){t=setInterval(nx,6500);}function stop(){clearInterval(t);}el.querySelector(".pnext").onclick=function(){stop();nx();auto();};el.querySelector(".pprev").onclick=function(){stop();go(i-1);auto();};dots.forEach(function(d){d.onclick=function(){stop();go(+d.dataset.i);auto();};});el.onmouseenter=stop;el.onmouseleave=auto;auto();});</script><script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
 <script type="text/javascript">if(!window.wcs_add)var wcs_add={};wcs_add["wa"]="REPLACE_NAVER_ANALYTICS_WA";if(window.wcs){wcs_do();}</script>
-<script>(function(){var U="/api/track",S={},W=30000;function K(ty){return "tk_"+ty+"_"+location.pathname;}function seen(ty){var k=K(ty),n=Date.now();if(S[k]&&n-S[k]<W)return 1;try{var v=sessionStorage.getItem(k);if(v&&n-(+v)<W)return 1;}catch(e){}return 0;}function mark(ty){var k=K(ty),n=Date.now();S[k]=n;try{sessionStorage.setItem(k,""+n);}catch(e){}}function t(ty,b){try{var d=JSON.stringify({type:ty,page:location.pathname,ref:document.referrer,b:b||""}),ok=false;if(navigator.sendBeacon){try{ok=navigator.sendBeacon(U,new Blob([d],{type:"application/json"}));}catch(e){}}if(!ok){try{fetch(U,{method:"POST",headers:{"Content-Type":"application/json"},body:d,keepalive:true}).catch(function(){});}catch(e){}}}catch(e){}}function c(ty,b){if(seen(ty))return;mark(ty);t(ty,b);}function L(a){try{var s=(a.getAttribute&&a.getAttribute("aria-label"))||a.textContent||"";var o="",sp=0,i,ch;for(i=0;i<s.length;i++){ch=s.charCodeAt(i);if(ch===32||ch===9||ch===10||ch===13){if(!sp){o+=" ";sp=1;}}else{o+=s.charAt(i);sp=0;}}return o.trim().slice(0,40);}catch(e){return "";}}function WV(v){try{if(navigator.userAgent.indexOf("; wv)")<0)return;var i=v.indexOf(":");if(i<0)return;var sch=v.slice(0,i),num="",j,ch;if(sch!=="tel"&&sch!=="sms")return;for(j=i+1;j<v.length;j++){ch=v.charCodeAt(j);if(ch>=48&&ch<=57)num+=v.charAt(j);}if(!num)return;var sc=sch==="tel"?"tel":"smsto",ac=sch==="tel"?"DIAL":"SENDTO",done=0;var f=function(){done=1;};document.addEventListener("visibilitychange",f,{once:true});window.addEventListener("pagehide",f,{once:true});setTimeout(function(){if(done||document.visibilityState!=="visible")return;location.href="intent://"+num+"#Intent;scheme="+sc+";action=android.intent.action."+ac+";end";},800);}catch(e){}}function h(e,early){var a=e.target&&e.target.closest&&e.target.closest("a,button,[data-tk]");if(!a)return;var k=(a.getAttribute&&a.getAttribute("data-tk"))||"",v=(a.getAttribute&&a.getAttribute("href"))||"";if(!k&&!v&&a.closest){var p=a.closest("a[href]");if(p){a=p;v=p.getAttribute("href")||"";}}if(k==="tel"||v.indexOf("tel:")===0){c("tel",L(a));if(!early)WV(v);}else if(k==="sms"||v.indexOf("sms:")===0){c("sms",L(a));if(!early)WV(v);}else if(!early&&k==="contact")c("contact",L(a));}document.addEventListener("pointerdown",function(e){h(e,1);},true);document.addEventListener("click",function(e){h(e,0);},true);if(location.pathname.indexOf("/api/")!==0)t("view");})();</script>
+<script>(function(){var U="/api/track",S={},W=90000;function K(ty){return "tk_"+ty+"_"+location.pathname;}function seen(ty){var k=K(ty),n=Date.now();if(S[k]&&n-S[k]<W)return 1;try{var v=sessionStorage.getItem(k);if(v&&n-(+v)<W)return 1;}catch(e){}return 0;}function mark(ty){var k=K(ty),n=Date.now();S[k]=n;try{sessionStorage.setItem(k,""+n);}catch(e){}}function t(ty,b){try{var d=JSON.stringify({type:ty,page:location.pathname,ref:document.referrer,b:b||""}),ok=false;if(navigator.sendBeacon){try{ok=navigator.sendBeacon(U,new Blob([d],{type:"application/json"}));}catch(e){}}if(!ok){try{fetch(U,{method:"POST",headers:{"Content-Type":"application/json"},body:d,keepalive:true}).catch(function(){});}catch(e){}}}catch(e){}}function c(ty,b){if(seen(ty))return;mark(ty);t(ty,b);}function L(a){try{var s=(a.getAttribute&&a.getAttribute("aria-label"))||a.textContent||"";return s.replace(/\s+/g," ").trim().slice(0,40);}catch(e){return "";}}function h(e,early){var a=e.target&&e.target.closest&&e.target.closest("a,button,[data-tk]");if(!a)return;var k=(a.getAttribute&&a.getAttribute("data-tk"))||"",v=(a.getAttribute&&a.getAttribute("href"))||"";if(!k&&!v&&a.closest){var p=a.closest("a[href]");if(p){a=p;v=p.getAttribute("href")||"";}}if(k==="tel"||v.indexOf("tel:")===0)c("tel",L(a));else if(k==="sms"||v.indexOf("sms:")===0)c("sms",L(a));else if(!early&&k==="contact")c("contact",L(a));}document.addEventListener("pointerdown",function(e){h(e,1);},true);document.addEventListener("click",function(e){h(e,0);},true);if(location.pathname.indexOf("/api/")!==0)t("view");})();</script>
 </body></html>`;
 }
 
@@ -1650,7 +1650,7 @@ function llmsTxt(){
 `;
   return new Response(body,{headers:{"content-type":"text/plain; charset=utf-8","cache-control":"public, max-age=86400"}});
 }
-function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nCrawl-delay: 10\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\n\n# SEO 분석 크롤러 — 색인에 도움 안 되므로 차단\nUser-agent: SemrushBot\nDisallow: /\nUser-agent: AhrefsBot\nDisallow: /\nUser-agent: AhrefsSiteAudit\nDisallow: /\nUser-agent: MJ12bot\nDisallow: /\nUser-agent: DotBot\nDisallow: /\nUser-agent: DataForSeoBot\nDisallow: /\nUser-agent: BLEXBot\nDisallow: /\nUser-agent: rogerbot\nDisallow: /\nUser-agent: SEOkicks\nDisallow: /\nUser-agent: Barkrowler\nDisallow: /\nUser-agent: serpstatbot\nDisallow: /\n\n# llms.txt: ${SITE_URL}/llms.txt\nLlms-txt: ${SITE_URL}/llms.txt\n# 전체 목록: ${SITE_URL}/list\nSitemap: ${SITE_URL}/sitemap.xml\n#DaumWebMasterTool:b088c6049dca14d95d9365d49409784120da4dabab9589768c62aeb3ce376cca:QmI+4F2t5jK1pbxPC/0WPA==\n`,{headers:{"content-type":"text/plain"}}); }
+function robots(){ return new Response(`User-agent: *\nAllow: /\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Perplexity-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: Claude-Web\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: CCBot\nAllow: /\nUser-agent: Bytespider\nAllow: /\nUser-agent: Naverbot\nAllow: /\nUser-agent: Yeti\nAllow: /\n# llms.txt: ${SITE_URL}/llms.txt\nLlms-txt: ${SITE_URL}/llms.txt\n# 전체 목록: ${SITE_URL}/list\nSitemap: ${SITE_URL}/sitemap.xml\n#DaumWebMasterTool:b088c6049dca14d95d9365d49409784120da4dabab9589768c62aeb3ce376cca:QmI+4F2t5jK1pbxPC/0WPA==\n`,{headers:{"content-type":"text/plain"}}); }
 
 // IndexNow: 전체 URL을 검색엔진에 즉시 제출
 async function indexnowPing(){
@@ -1680,7 +1680,7 @@ function notFound(){ return new Response(layout({title:`페이지를 찾을 수 
 
 // ---------- 라우터 ----------
 /* ─── 텔레그램 전환 알림 (템플릿 적용) ─── */
-const TG_LABEL = { tel: '전화 버튼 클릭', sms: '문자 버튼 클릭', contact: '상담 신청 접수' };
+const TG_LABEL = { tel: '전화 버튼 클릭', sms: '문자 버튼 클릭', contact: '상담 버튼 클릭' };
 const TG_SITE   = '클래스와와';
 const TG_DOMAIN = 'classwawa.com';
 const TG_ORIGIN = 'https://classwawa.com';
@@ -1728,7 +1728,7 @@ const TG_BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|curl|wget|python|a
    클라이언트 디바운스는 새 탭·시크릿창·브라우저 재시작으로 초기화된다.
    같은 site+type+page+ip 가 TK_DUP_MS 안에 이미 기록돼 있으면 중복으로 보고 버린다.
    조회가 실패하면 false 를 돌려 추적 자체는 절대 막지 않는다. */
-const TK_DUP_MS = 2 * 60 * 1000;   /* 실측: 연타 간격 중앙 5초·최대 57초. 10분은 공유 IP(CGNAT) 오탐만 키웠다 */
+const TK_DUP_MS = 10 * 60 * 1000;
 async function tkDup(env, site, type, page, ip) {
   if (!env || !env.DB || !ip || type === 'view') return false;
   try {
@@ -1736,7 +1736,6 @@ async function tkDup(env, site, type, page, ip) {
     const row = await env.DB.prepare(
       'SELECT 1 FROM events WHERE site=? AND type=? AND page=? AND ip=? AND ts>? LIMIT 1'
     ).bind(site, type, page, ip, since).first();
-    if (row) console.log('tkDup 차단 site=' + site + ' type=' + type + ' ip=' + ip + ' page=' + page);
     return !!row;
   } catch (e) { return false; }
 }
@@ -1820,30 +1819,10 @@ const ip=request.headers.get("CF-Connecting-IP")||"";const ua=request.headers.ge
   if(m){ const dong=slug2dong()[m[1]]; if(dong){ const ch=idx.byDong[dong]; if(ch) return html(pageDong(dong,ch)); } return notFound(); }
   return notFound();
 }
-
-/* ── 스크래퍼 차단 ──────────────────────────────────────────
-   라우팅·렌더링 전에 끊는다. 계정에 WAF 쓰기 권한이 없어 워커에서 처리한다.
-   185.218.86.11 = TC DATACENTER LIMITED (AMS 경유). 1시간에 2만 요청,
-   위장 UA Firefox/47.0, PUT 남발로 504 를 유발했다.
-   허용 메서드는 GET/POST/HEAD/OPTIONS 뿐이다. */
-const BLOCK_IPS = new Set(["185.218.86.11"]);
-const BLOCK_UA_RE = /Firefox\/47\.0\b/i;
-const ALLOWED_METHODS = new Set(["GET", "POST", "HEAD", "OPTIONS"]);
-function blockScraper(request){
-  const nostore = { "cache-control": "no-store" };
-  if(!ALLOWED_METHODS.has(request.method))
-    return new Response("Method Not Allowed", { status: 405, headers: Object.assign({ "allow": "GET, POST, HEAD, OPTIONS" }, nostore) });
-  if(BLOCK_IPS.has(request.headers.get("cf-connecting-ip") || ""))
-    return new Response("Forbidden", { status: 403, headers: nostore });
-  if(BLOCK_UA_RE.test(request.headers.get("user-agent") || ""))
-    return new Response("Forbidden", { status: 403, headers: nostore });
-  return null;
-}
-
 export default {
   /* 매일 1회 IndexNow 자동 제출 (cron 은 wrangler.toml [triggers]) */
   async scheduled(event, env, ctx){ ctx.waitUntil(indexnowPing()); },
-  async fetch(request, env, ctx){
-    const __blk = blockScraper(request); if(__blk) return __blk;
-    try{ return await handle(request, env, ctx); }catch(e){ return new Response("Error: "+e.message+"\n"+e.stack,{status:500}); } }
+  async fetch(request, env, ctx){ try{ return await handle(request, env, ctx); }catch(e){ return new Response("Error: "+e.message+"\n"+e.stack,{status:500}); } }
 };
+
+export { tgNotify as __n };
