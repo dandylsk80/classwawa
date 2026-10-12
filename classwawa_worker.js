@@ -297,6 +297,10 @@ const THUMBS = [
   "pexels-yaroslav-shuraev-9489804.jpg",
 ];
 const THUMB_DIR = "https://cdn.jsdelivr.net/gh/dandylsk80/semoacademy@main/image";
+// og:image — 같은 사진을 1200×630 으로 크롭한 JPG (이 저장소 image/og/, 파일명 동일). 사진 없는 페이지는 로고 카드 PNG
+const OG_DIR = "https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/og";
+const OG_DEFAULT = OG_DIR + "/og-home.png";
+function ogFor(key){ const t = thumbFor(key); return t ? OG_DIR + t.slice(THUMB_DIR.length) : OG_DEFAULT; }
 function thumbFor(key){
   if(!THUMBS.length) return null;
   const rng = seedRng(key+"thumb");
@@ -542,7 +546,7 @@ function layout({title,desc,canonical,jsonld,body,crumb,image,source}){
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta property="og:type" content="website"><meta property="og:title" content="${esc(T)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:site_name" content="${SITE_NAME}"><meta property="og:image" content="${image||SITE_URL+'/logo.png'}">
+<meta property="og:type" content="website"><meta property="og:title" content="${esc(T)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:site_name" content="${SITE_NAME}"><meta property="og:image" content="${image||OG_DEFAULT}">
 ${ldBlocks}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&display=swap" rel="stylesheet">
 <style>${CSS}</style></head><body>
@@ -1178,7 +1182,7 @@ function pageSubject(dong, subj, lv, chere){
   const body = `${thumb}<h1>${esc(kw)}</h1>${dateBar}${aliasBadge}${summary}${toc}${secs}${schoolTbl}${cards}${cta}${related}${faqHtml}<div class="note">정확한 수업 시간 및 교습비는 지역별·과목별로 상이할 수 있습니다. 자세한 사항은 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sgg,url:urlDong(dong)},{name:kw}];
   const ttl = alias ? `${kw} (${alias}) | ${sgg} ${subj} 학원` : `${kw} | ${sgg} ${subj} 학원 정보`;
-  return layout({title:ttl, desc, canonical, jsonld, body, crumb, image:thumbFor(key), source:centerSource(chere)});
+  return layout({title:ttl, desc, canonical, jsonld, body, crumb, image:ogFor(key), source:centerSource(chere)});
 }
 
 function parseFaq(text){
@@ -1416,7 +1420,7 @@ function pageDong(dong, chere){
   const __dd=pageDates(`dong|${dong}`); const __dbar=`<div class="dates"><span>📅 발행일 <b>${__dd.publishedKor}</b></span><span>🔄 수정일 <b>${__dd.modifiedKor}</b></span></div>`; const body=`${thumb}<h1>${esc(dong)} 학원 정보</h1>${__dbar}${aliasBadge}${summary}${dongProse(dong,sgg,sido,alias,chere)}<section class="sec" id="lvsec"><h2>${esc(dong)} 과목·학년별 학원</h2>${lvBlocks}</section>${cards}${nearbyBlock(sido,sgg,dong)}<div class="note">정확한 수업 시간 및 교습비는 각 학원에 방문상담을 통해 확인하시기 바랍니다.</div>`;
   const crumb=[{name:"홈",url:"/"},{name:sido,url:urlRegion(sido)},{name:dong}];
   const ttl=alias?`${dong} 학원 (${alias}) | ${sgg}`:`${dong} 학원 | ${sgg} 과목별 학원 정보`;
-  return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:thumbFor(`dong|${dong}`), source:centerSource(chere)});
+  return layout({title:ttl, desc, canonical, jsonld:"", body, crumb, image:ogFor(`dong|${dong}`), source:centerSource(chere)});
 }
 
 // ---------- 페이지: 센터 ----------
