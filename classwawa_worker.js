@@ -269,7 +269,7 @@ const THUMBS = [
   "pexels-asia-culture-center-3116378-13916997.jpg",
   "pexels-chipi1189-33964549.jpg",
   "pexels-delot-18471480.jpg",
-  "pexels-doan-thanh-binh-2147604563-36887759.jpg",
+  "pexels-ron-lach-9871139.jpg",
   "pexels-enginakyurt-2946974.jpg",
   "pexels-hujason-29461083.jpg",
   "pexels-joshsorenson-990432.jpg",
@@ -940,7 +940,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .subjcard:nth-child(2){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/12.jpg') center/cover no-repeat}
 .subjcard:nth-child(3){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/13.jpg') center/cover no-repeat}
 .subjcard:nth-child(4){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/14.jpg') center/cover no-repeat}
-.subjcard:nth-child(5){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/15.jpg') center/cover no-repeat}
+.subjcard:nth-child(5){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/92.jpg') center/cover no-repeat}
 .subjcard::before{display:none}
 .subjcard:hover{border-color:var(--ink);transition:.15s}
 .howto{background:var(--soft);border:none;border-radius:16px}
