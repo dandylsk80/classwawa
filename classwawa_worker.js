@@ -1,3 +1,18 @@
+/* /img/<파일> — 자기 저장소 image/ 사진 자체 서빙(2026-10-16): jsDelivr 간헐 503 대비. 허용 목록 → Cache API(IMG_VER) → GitHub raw → jsDelivr 폴백 → 1년 immutable */
+const IMG_ORIGIN="https://classwawa.com";
+const IMG_VER="1";
+const IMG_OK=/^([A-Za-z0-9._-]+\/)?[A-Za-z0-9._-]+\.(jpe?g|png|webp|gif|svg)$/;
+async function imgProxy(request,ctx,p){
+  if(!IMG_OK.test(p)) return new Response("not found",{status:404});
+  let repo="classwawa", rest=p;
+  if(p.indexOf("semo/")===0){ repo="semoacademy"; rest=p.slice(5); }
+  const ext=p.split(".").pop().toLowerCase(); const ct=ext==="png"?"image/png":ext==="webp"?"image/webp":ext==="gif"?"image/gif":ext==="svg"?"image/svg+xml":"image/jpeg";
+  const key=new Request(IMG_ORIGIN+"/img/"+p+"?v="+IMG_VER,{method:"GET"}); const cache=(typeof caches!=="undefined"&&caches.default)?caches.default:null;
+  if(cache){ try{ const hit=await cache.match(key); if(hit) return hit; }catch(e){} }
+  const srcs=["https://raw.githubusercontent.com/dandylsk80/"+repo+"/main/image/"+rest,"https://cdn.jsdelivr.net/gh/dandylsk80/"+repo+"@main/image/"+rest];
+  for(let i=0;i<srcs.length;i++){ try{ const r=await fetch(srcs[i]); if(r.ok){ const body=await r.arrayBuffer(); const res=new Response(body,{headers:{"content-type":ct,"cache-control":"public, max-age=31536000, immutable","x-img-src":i?"jsd":"raw"}}); if(cache&&ctx&&ctx.waitUntil) ctx.waitUntil(cache.put(key,res.clone())); return res; } }catch(e){} }
+  return new Response("image unavailable",{status:502});
+}
 /* ---------- 파비콘 (18개 공통 규격: ico 16·32·48 / favicon-32.png / apple-touch-icon 180) ----------
    ~/sites/powerlandschool/tools/gen.mjs 로 생성. 경로마다 제 형식의 바이트를 돌려준다. */
 const ICON_ICO  = "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";
@@ -297,9 +312,9 @@ const THUMBS = [
   "pexels-voltfather-18243125.jpg",
   "pexels-yaroslav-shuraev-9489804.jpg",
 ];
-const THUMB_DIR = "https://cdn.jsdelivr.net/gh/dandylsk80/semoacademy@main/image";
+const THUMB_DIR = IMG_ORIGIN+"/img/semo";
 // og:image — 같은 사진을 1200×630 으로 크롭한 JPG (이 저장소 image/og/, 파일명 동일). 사진 없는 페이지는 로고 카드 PNG
-const OG_DIR = "https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/og";
+const OG_DIR = IMG_ORIGIN+"/img/og";
 const OG_DEFAULT = OG_DIR + "/og-home.png";
 function ogFor(key){ const t = thumbFor(key); return t ? OG_DIR + t.slice(THUMB_DIR.length) : OG_DEFAULT; }
 function thumbFor(key){
@@ -949,11 +964,11 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .subjdesc{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 .subjicon{filter:none!important;text-shadow:0 1px 6px rgba(0,0,0,.5)}
 .subjcard:hover{transform:translateY(-3px);border:none}
-.subjcard:nth-child(1){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/11.jpg') center/cover no-repeat}
-.subjcard:nth-child(2){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/12.jpg') center/cover no-repeat}
-.subjcard:nth-child(3){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/13.jpg') center/cover no-repeat}
-.subjcard:nth-child(4){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/14.jpg') center/cover no-repeat}
-.subjcard:nth-child(5){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/92.jpg') center/cover no-repeat}
+.subjcard:nth-child(1){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('/img/11.jpg') center/cover no-repeat}
+.subjcard:nth-child(2){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('/img/12.jpg') center/cover no-repeat}
+.subjcard:nth-child(3){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('/img/13.jpg') center/cover no-repeat}
+.subjcard:nth-child(4){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('/img/14.jpg') center/cover no-repeat}
+.subjcard:nth-child(5){background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.5)),url('/img/92.jpg') center/cover no-repeat}
 .subjcard::before{display:none}
 .subjcard:hover{border-color:var(--ink);transition:.15s}
 .howto{background:var(--soft);border:none;border-radius:16px}
@@ -967,7 +982,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .cta .cphone{background:var(--ink)}
 /* 히어로 배경 이미지 */
 .hero{position:relative;overflow:hidden;background:#fff;border:none;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:200px max(24px,calc(50vw - 490px));min-height:560px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,20,28,.72) 0%,rgba(15,20,28,.42) 55%,rgba(15,20,28,.18) 100%),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/111.jpg') center 25%/cover no-repeat;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,20,28,.72) 0%,rgba(15,20,28,.42) 55%,rgba(15,20,28,.18) 100%),url('/img/111.jpg') center 25%/cover no-repeat;z-index:0}
 .hero>*{position:relative;z-index:1}
 .hero h1{font-size:2.5rem;line-height:1.4;letter-spacing:-.03em;text-align:left;margin:0 0 16px;font-weight:900;color:#fff}
 .hero h1 .accent{color:#fff}
@@ -1079,7 +1094,7 @@ body{background:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Goth
 .ph img,.pslide img,.bslide img{filter:none}
 /* CTA — 배경 사진(222) 풀와이드 + 흰 글씨 */
 .cta{position:relative;overflow:hidden;border:none!important;background:#374151!important}
-.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.22),rgba(15,20,28,.34)),url('https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/222.jpg') center/cover no-repeat;z-index:0}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(15,20,28,.22),rgba(15,20,28,.34)),url('/img/222.jpg') center/cover no-repeat;z-index:0}
 .cta>*{position:relative;z-index:1}
 .cta h2{color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 .cta p{color:rgba(255,255,255,.92)!important;text-shadow:0 1px 6px rgba(0,0,0,.4)}
@@ -1493,20 +1508,20 @@ function pageHome(){
 <h3>공부가 편해지는 공간</h3>
 <p>와와학원은 오랜 코칭 교육 경험을 바탕으로, <span class="hl">공부가 잘 되는 환경과 성적이 오르는 경험</span>을 만드는 데 집중합니다.</p>
 <p>학생 눈높이에서 진행되는 수평적인 수업이 <span class="hl">수업 참여도와 이해도</span>를 함께 끌어올립니다.</p>
-</div><div class="pslider" id="ps_feat1"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/60.jpg" alt="수업 공간 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/61.jpg" alt="수업 공간 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/62.jpg" alt="수업 공간 3" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/63.jpg" alt="수업 공간 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
+</div><div class="pslider" id="ps_feat1"><div class="ptrack"><div class="pslide"><img src="https://classwawa.com/img/60.jpg" alt="수업 공간 1" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/61.jpg" alt="수업 공간 2" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/62.jpg" alt="수업 공간 3" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/63.jpg" alt="수업 공간 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
 
 <div class="featpanel green"><div>
 <h3>수업 그 너머의 생활 관리</h3>
 <p>공부는 수업 시간 안에서만 일어나지 않습니다. <span class="hl">학생과의 일상 소통, 학부모와의 꾸준한 피드백</span>으로 학습 습관과 생활 리듬까지 함께 살핍니다.</p>
 <p>아이의 하루를 함께 이해하고 챙기는 <span class="hl">생활 밀착형 학습 코칭</span>이 와와의 방식입니다.</p>
-</div><div class="pslider" id="ps_feat2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/70.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/71.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/72.jpg" alt="생활 관리 3" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/73.jpg" alt="생활 관리 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
+</div><div class="pslider" id="ps_feat2"><div class="ptrack"><div class="pslide"><img src="https://classwawa.com/img/70.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/71.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/72.jpg" alt="생활 관리 3" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/73.jpg" alt="생활 관리 4" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button><button class="pdot" data-i="3"></button></div></div></div>
 
 <section class="sec procsec"><h2>🧩 와와의 맞춤 학습 과정</h2><p class="subt">네 단계로 아이에게 맞는 학습을 설계합니다.</p>
 <div class="proc4">
-<div class="pc"><div class="pcnum">01</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/51.jpg" alt="맞춤 진단" loading="lazy"><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
-<div class="pc"><div class="pcnum">02</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/52.jpg" alt="맞춤 계획" loading="lazy"><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
-<div class="pc"><div class="pcnum">03</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/53.jpg" alt="맞춤 상담" loading="lazy"><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
-<div class="pc"><div class="pcnum">04</div><img class="pcbg" src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/54.jpg" alt="맞춤 지도" loading="lazy"><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
+<div class="pc"><div class="pcnum">01</div><img class="pcbg" src="https://classwawa.com/img/51.jpg" alt="맞춤 진단" loading="lazy"><b>맞춤 진단</b><p>현재 실력과 학습 습관을 살펴봅니다.</p></div>
+<div class="pc"><div class="pcnum">02</div><img class="pcbg" src="https://classwawa.com/img/52.jpg" alt="맞춤 계획" loading="lazy"><b>맞춤 계획</b><p>진도와 교재를 아이에게 맞춰 정합니다.</p></div>
+<div class="pc"><div class="pcnum">03</div><img class="pcbg" src="https://classwawa.com/img/53.jpg" alt="맞춤 상담" loading="lazy"><b>맞춤 상담</b><p>정기 상담으로 방향을 함께 점검합니다.</p></div>
+<div class="pc"><div class="pcnum">04</div><img class="pcbg" src="https://classwawa.com/img/54.jpg" alt="맞춤 지도" loading="lazy"><b>맞춤 지도</b><p>약한 부분을 개별적으로 채워 갑니다.</p></div>
 </div></section>
 
 <section class="sec"><h2>⚖️ 일반 수업과 무엇이 다른가요</h2>
@@ -1524,19 +1539,19 @@ function pageHome(){
 <span class="tag">계획을 세우고 실천하는 힘</span><h3>플랜 관리</h3>
 <p>무작정 공부하라고 하지 않습니다. 선생님과 함께 학습 목표와 우선순위를 정하고, <b>시간과 분량을 스스로 조절하는 법</b>을 익힙니다.</p>
 <p>계획하고 실행하는 경험이 쌓이면서 자기주도 학습의 기초 체력이 자랍니다.</p>
-</div><div class="pslider" id="ps_mgmt1"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a11.jpg" alt="플랜 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a12.jpg" alt="플랜 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/a13.jpg" alt="플랜 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
+</div><div class="pslider" id="ps_mgmt1"><div class="ptrack"><div class="pslide"><img src="https://classwawa.com/img/a11.jpg" alt="플랜 관리 1" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/a12.jpg" alt="플랜 관리 2" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/a13.jpg" alt="플랜 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
 <div class="mgmt"><div>
 <span class="tag">아이에게 맞는 방식으로</span><h3>학습 관리</h3>
 <p>진도만 빠르게 나가지 않습니다. <b>현재 수준과 이해도에 맞춘 교재와 공부법</b>으로 기초부터 다집니다.</p>
 <p>오답노트, 백지노트 같은 도구로 <b>나에게 맞는 공부 방법</b>을 찾아가면, 성적은 자연스럽게 따라옵니다.</p>
-</div><div class="pslider" id="ps_mgmt2"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b11.jpg" alt="학습 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b12.jpg" alt="학습 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/b13.jpg" alt="학습 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
+</div><div class="pslider" id="ps_mgmt2"><div class="ptrack"><div class="pslide"><img src="https://classwawa.com/img/b11.jpg" alt="학습 관리 1" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/b12.jpg" alt="학습 관리 2" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/b13.jpg" alt="학습 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
 <div class="mgmt"><div>
 <span class="tag">학원 밖에서도 이어지는</span><h3>생활 관리</h3>
 <p><b>학생과의 일상 소통과 학부모 피드백</b>으로 학습 습관, 생활 리듬, 마음 상태까지 함께 살핍니다.</p>
 <p>아이의 하루를 이해하고 챙기는 것이 와와학원의 진짜 강점입니다.</p>
-</div><div class="pslider" id="ps_mgmt3"><div class="ptrack"><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c11.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c12.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://cdn.jsdelivr.net/gh/dandylsk80/classwawa@main/image/c13.jpg" alt="생활 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
+</div><div class="pslider" id="ps_mgmt3"><div class="ptrack"><div class="pslide"><img src="https://classwawa.com/img/c11.jpg" alt="생활 관리 1" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/c12.jpg" alt="생활 관리 2" loading="lazy"></div><div class="pslide"><img src="https://classwawa.com/img/c13.jpg" alt="생활 관리 3" loading="lazy"></div></div><button class="pnav pprev">‹</button><button class="pnav pnext">›</button><div class="pdots"><button class="pdot on" data-i="0"></button><button class="pdot" data-i="1"></button><button class="pdot" data-i="2"></button></div></div></div>
 
 <div class="plus"><h2>➕ 와와학원의 특장점</h2>
 <ul>
@@ -1983,6 +1998,7 @@ const ip=request.headers.get("CF-Connecting-IP")||"";const ua=request.headers.ge
             .bind('classwawa', b.type, (b.page||'').slice(0,300), (b.ref||'').slice(0,120), ip, ts, ...tkMeta(request.headers.get('User-Agent')||'', b.ref||'', 'classwawa.com', b.q||"")).run();}}catch(e){ console.log('[track] fail', e&&e.message); } })(); if(ctx&&ctx.waitUntil) ctx.waitUntil(__task); else await __task; }catch(e){}return new Response(JSON.stringify({ok:true}),{headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"}});}
   if(path==="/api/track"&&request.method==="OPTIONS")return new Response(null,{headers:{"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"POST,OPTIONS","Access-Control-Allow-Headers":"Content-Type"}});
   if(path==="/") return html(pageHome());
+  if(path.indexOf("/img/")===0) return imgProxy(request,ctx,path.slice(5));
   if(path==="/robots.txt") return robots();
   if(path==="/llms.txt"||path==="/llms-full.txt") return llmsTxt();
   if(path.startsWith("/sitemap")||path==="/rss.xml"||path==="/rss"||path==="/feed"||path==="/atom.xml"||path==="/atom") await loadPosts(env);   /* 사이트맵·RSS 는 동기 함수 */
